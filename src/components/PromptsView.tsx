@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { Prompt } from '../types';
 import EditPromptModal from './EditPromptModal';
 import FileUpload from './FileUpload';
+import ConfirmationDialog from './ConfirmationDialog';
 
 interface PromptsViewProps {
   prompts: Prompt[];
@@ -23,6 +24,7 @@ const PromptsView: React.FC<PromptsViewProps> = ({
   const [editingPrompt, setEditingPrompt] = useState<Prompt | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [deletingPromptId, setDeletingPromptId] = useState<string | null>(null);
 
   const handleEdit = (prompt: Prompt) => {
     setEditingPrompt(prompt);
@@ -34,6 +36,17 @@ const PromptsView: React.FC<PromptsViewProps> = ({
       await onToggleActive(id);
     } catch (error) {
       setError('Failed to toggle prompt status');
+    }
+  };
+
+  const handleDeleteClick = (id: string) => {
+    setDeletingPromptId(id);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (deletingPromptId) {
+      onDeletePrompt(deletingPromptId);
+      setDeletingPromptId(null);
     }
   };
 
@@ -104,7 +117,7 @@ const PromptsView: React.FC<PromptsViewProps> = ({
                       )}
                     </button>
                     <button
-                      onClick={() => onDeletePrompt(prompt.id)}
+                      onClick={() => handleDeleteClick(prompt.id)}
                       className="text-red-600 hover:text-red-800"
                       title="Delete prompt"
                     >
@@ -133,6 +146,16 @@ const PromptsView: React.FC<PromptsViewProps> = ({
           prompt={editingPrompt}
         />
       )}
+
+      <ConfirmationDialog
+        isOpen={deletingPromptId !== null}
+        onClose={() => setDeletingPromptId(null)}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Prompt"
+        message="Are you sure you want to delete this prompt? This action cannot be undone."
+        confirmText="Delete"
+        cancelText="Cancel"
+      />
     </div>
   );
 };

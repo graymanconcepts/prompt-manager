@@ -10,7 +10,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, currentView }) => {
   const items = [
     { name: 'Dashboard', icon: Home, view: 'dashboard' as const },
     { name: 'Prompt Glossary', icon: Book, view: 'glossary' as const },
-    { name: 'Prompt Manager', icon: Database, view: 'prompts' as const },
+    { name: 'Prompt Management', icon: Database, view: 'prompts' as const },
     { name: 'History', icon: History, view: 'history' as const },
     { name: 'Analytics', icon: BarChart2, view: 'analytics' as const },
   ];
