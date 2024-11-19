@@ -14,6 +14,7 @@ const EditPromptModal: React.FC<EditPromptModalProps> = ({ isOpen, onClose, onSa
   const [content, setContent] = useState(prompt.content);
   const [tags, setTags] = useState(prompt.tags.join(','));
   const [isCopied, setIsCopied] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     setTitle(prompt.title);
@@ -27,7 +28,7 @@ const EditPromptModal: React.FC<EditPromptModalProps> = ({ isOpen, onClose, onSa
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 2000); // Reset after 2 seconds
     } catch (err) {
-      console.error('Failed to copy text:', err);
+      setError('Failed to copy text to clipboard');
     }
   };
 
@@ -64,6 +65,11 @@ const EditPromptModal: React.FC<EditPromptModalProps> = ({ isOpen, onClose, onSa
           </div>
 
           <form onSubmit={handleSubmit} className="p-6">
+            {error && (
+              <div className="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span className="block sm:inline">{error}</span>
+              </div>
+            )}
             <div className="space-y-6">
               <div>
                 <label htmlFor="title" className="block text-sm font-medium text-gray-700">

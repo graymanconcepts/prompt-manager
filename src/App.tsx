@@ -26,7 +26,7 @@ function App() {
         setPrompts(promptsData);
         setHistory(historyData);
       } catch (error) {
-        console.error('Error loading data:', error);
+        setIsLoading(false);
       } finally {
         setIsLoading(false);
       }
@@ -46,39 +46,28 @@ function App() {
 
   const handleAddPromptsInternal = async (newPrompts: Prompt[], historyEntry: UploadHistory) => {
     try {
-      console.log('Adding prompts:', newPrompts);
-      
-      // Create all prompts
       for (const prompt of newPrompts) {
         try {
-          console.log('Creating prompt:', prompt);
           await api.createPrompt(prompt);
-          console.log('Prompt created successfully');
         } catch (error) {
-          console.error('Error creating prompt:', error);
           // Continue with other prompts even if one fails
         }
       }
 
-      // Create history entry with original filename
       await api.createHistory(historyEntry);
 
-      // Get updated data
       const [updatedPrompts, updatedHistory] = await Promise.all([
         api.getAllPrompts(),
         api.getAllHistory()
       ]);
       setPrompts(updatedPrompts);
       setHistory(updatedHistory);
-      
-      console.log('Successfully added all prompts');
     } catch (error) {
-      console.error('Error in handleAddPrompts:', error);
+      setIsLoading(false);
     }
   };
 
   const handleAddPrompts = (newPrompts: Prompt[]) => {
-    // Create a default history entry
     const historyEntry: UploadHistory = {
       id: crypto.randomUUID(),
       fileName: `batch_upload_${new Date().toISOString()}`,
@@ -113,7 +102,7 @@ function App() {
       setPrompts(updatedPrompts);
       setHistory(updatedHistory);
     } catch (error) {
-      console.error('Error adding prompt:', error);
+      setIsLoading(false);
     }
   };
 
@@ -122,7 +111,7 @@ function App() {
       const updatedPrompts = await api.updatePrompt(updatedPrompt);
       setPrompts(updatedPrompts);
     } catch (error) {
-      console.error('Error updating prompt:', error);
+      setIsLoading(false);
     }
   };
 
@@ -131,17 +120,36 @@ function App() {
       const updatedPrompts = await api.deletePrompt(id);
       setPrompts(updatedPrompts);
     } catch (error) {
-      console.error('Error deleting prompt:', error);
+      setIsLoading(false);
     }
   };
 
-  const handleToggleActive = async (id: string) => {
+  const handleTogglePromptActive = async (id: string) => {
+    try {
+      const prompt = prompts.find(p => p.id === id);
+      if (!prompt) return;
+
+      const updatedPrompt = {
+        ...prompt,
+        isActive: !prompt.isActive,
+        lastModified: new Date().toISOString()
+      };
+
+      await api.updatePrompt(updatedPrompt);
+      const updatedPrompts = await api.getAllPrompts();
+      setPrompts(updatedPrompts);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  const handleToggleHistoryActive = async (id: string) => {
     try {
       await api.toggleHistoryActive(id);
       const updatedHistory = await api.getAllHistory();
       setHistory(updatedHistory);
     } catch (error) {
-      console.error('Error toggling active state:', error);
+      setIsLoading(false);
     }
   };
 
@@ -182,15 +190,15 @@ function App() {
           )}
           {currentView === 'prompts' && (
             <PromptsView 
-              prompts={prompts} 
+              prompts={prompts}
               onEditPrompt={handleEditPrompt}
               onDeletePrompt={handleDeletePrompt}
-              onUpdatePrompts={setPrompts}
               onAddPrompts={handleAddPrompts}
+              onToggleActive={handleTogglePromptActive}
             />
           )}
           {currentView === 'history' && (
-            <HistoryView history={history} onToggleActive={handleToggleActive} />
+            <HistoryView history={history} onToggleActive={handleToggleHistoryActive} />
           )}
           {currentView === 'analytics' && (
             <AnalyticsView prompts={prompts} />

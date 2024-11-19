@@ -11,7 +11,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
   const [error, setError] = useState<string | null>(null);
 
   const processFile = useCallback((file: File) => {
-    console.log('Processing file:', file.name);
     const reader = new FileReader();
     
     // Get filename without extension for use as name
@@ -20,13 +19,11 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
     
     reader.onload = (e) => {
       try {
-        console.log('File loaded, processing content...');
         const text = e.target?.result as string;
         let prompts: Prompt[] = [];
 
         // Try to parse as JSON first
         try {
-          console.log('Attempting to parse as JSON...');
           const jsonData = JSON.parse(text);
           if (Array.isArray(jsonData)) {
             prompts = jsonData.map(item => ({
@@ -39,11 +36,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
               lastModified: new Date().toISOString(),
               isActive: true
             }));
-            console.log('Successfully parsed JSON, created prompts:', prompts.length);
           }
         } catch (jsonError) {
-          console.log('JSON parse failed, processing as text file');
-          
           // Split content by empty lines to separate prompts
           const blocks = text.split('\n\n');
           prompts = blocks
@@ -61,8 +55,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
               lastModified: new Date().toISOString(),
               isActive: true
             }));
-          
-          console.log('Created prompts from text blocks:', prompts.length);
         }
 
         if (prompts.length > 0) {
@@ -77,20 +69,17 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
             errorMessage: null
           };
           
-          console.log('Calling onFileProcess with prompts:', prompts);
           onFileProcess(prompts, historyEntry);
           setError(null);
         } else {
           setError('No valid content found in file');
         }
       } catch (error) {
-        console.error('Error processing file:', error);
         setError('Error processing file');
       }
     };
 
     reader.onerror = () => {
-      console.error('Error reading file:', reader.error);
       setError('Error reading file');
     };
 
@@ -134,7 +123,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
       file.name.endsWith('.md') ||
       file.name.endsWith('.markdown')
     );
-    console.log('Files dropped:', files.length);
     if (files.length === 0) {
       setError('Please drop a .txt, .json, or .md file');
       return;
@@ -144,7 +132,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    console.log('Files selected:', files.length);
     if (files.length === 0) {
       setError('Please select a .txt, .json, or .md file');
       return;

@@ -4,42 +4,36 @@ import { format } from 'date-fns';
 import { Prompt } from '../types';
 import EditPromptModal from './EditPromptModal';
 import FileUpload from './FileUpload';
-import { api } from '../api/client';
 
 interface PromptsViewProps {
   prompts: Prompt[];
   onDeletePrompt: (id: string) => void;
   onEditPrompt: (prompt: Prompt) => void;
-  onUpdatePrompts: (prompts: Prompt[]) => void;
   onAddPrompts: (newPrompts: Prompt[]) => void;
+  onToggleActive: (id: string) => void;
 }
 
 const PromptsView: React.FC<PromptsViewProps> = ({ 
   prompts, 
   onDeletePrompt, 
   onEditPrompt, 
-  onUpdatePrompts,
-  onAddPrompts 
+  onAddPrompts,
+  onToggleActive
 }) => {
   const [editingPrompt, setEditingPrompt] = useState<Prompt | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleEdit = (prompt: Prompt) => {
     setEditingPrompt(prompt);
     setIsEditModalOpen(true);
   };
 
-  const handleToggleActive = async (prompt: Prompt) => {
+  const handleToggleActive = async (id: string) => {
     try {
-      const updatedPrompt = {
-        ...prompt,
-        isActive: !prompt.isActive,
-        lastModified: new Date().toISOString()
-      };
-      const updatedPrompts = await api.updatePrompt(updatedPrompt);
-      onUpdatePrompts(updatedPrompts);
+      await onToggleActive(id);
     } catch (error) {
-      console.error('Error toggling prompt active state:', error);
+      setError('Failed to toggle prompt status');
     }
   };
 
@@ -50,6 +44,7 @@ const PromptsView: React.FC<PromptsViewProps> = ({
 
   return (
     <div className="container mx-auto px-4 py-8">
+      {error && <div className="text-red-600">{error}</div>}
       <div className="mb-8">
         <FileUpload onFileProcess={onAddPrompts} />
       </div>
@@ -79,7 +74,7 @@ const PromptsView: React.FC<PromptsViewProps> = ({
                   {truncateText(prompt.content, 100)}
                 </td>
                 <td className="py-4 px-6">
-                  <span className={`px-2 py-1 rounded-full text-xs ${
+                  <span className={`inline-block px-2 py-1 rounded text-xs ${
                     prompt.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
                   }`}>
                     {prompt.isActive ? 'Active' : 'Inactive'}
@@ -95,7 +90,7 @@ const PromptsView: React.FC<PromptsViewProps> = ({
                       <Pencil className="h-5 w-5" />
                     </button>
                     <button
-                      onClick={() => handleToggleActive(prompt)}
+                      onClick={() => handleToggleActive(prompt.id)}
                       className={`${
                         prompt.isActive ? 'text-gray-600' : 'text-gray-400'
                       } hover:text-gray-800`}

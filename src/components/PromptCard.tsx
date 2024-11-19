@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns';
-import { Tag, Edit, Trash2 } from 'lucide-react';
+import { Edit, Trash2 } from 'lucide-react';
 import { Prompt } from '../types';
 import EditPromptModal from './EditPromptModal';
+import { TagList } from './Tag';
 
 interface PromptCardProps {
   prompt: Prompt;
@@ -43,16 +44,16 @@ const PromptCard: React.FC<PromptCardProps> = ({ prompt, onEdit, onDelete }) => 
           <p className="mt-2 text-sm text-gray-500 line-clamp-2">
             {prompt.description}
           </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {prompt.tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-              >
-                <Tag className="h-3 w-3 mr-1" />
-                {tag}
-              </span>
-            ))}
+          <div className="mt-4">
+            <TagList 
+              tags={prompt.tags} 
+              showIcons={true}
+              tagStyle={{
+                backgroundColor: '#D5FFFF',
+                color: '#1D4ED8',
+                border: '1px solid rgba(29, 78, 216, 0.1)'
+              }}
+            />
           </div>
           <div className="mt-4 text-xs text-gray-500">
             Last modified: {format(new Date(prompt.lastModified), 'MMM d, yyyy')}

@@ -157,26 +157,28 @@ class Database {
   }
 
   async getAllPrompts(): Promise<Prompt[]> {
-    const prompts = await this.all<Prompt>('SELECT * FROM prompts ORDER BY created DESC');
+    type DBPrompt = Omit<Prompt, 'tags'> & { tags: string };
+    const prompts = await this.all<DBPrompt>('SELECT * FROM prompts ORDER BY created DESC');
     return prompts.map(prompt => ({
       ...prompt,
-      tags: prompt.tags ? JSON.parse(prompt.tags) : [],
+      tags: prompt.tags ? prompt.tags.split(',').map(tag => tag.trim()).filter(Boolean) : [],
       isActive: Boolean(prompt.isActive)
     }));
   }
 
   async getPromptById(id: string): Promise<Prompt | null> {
-    const prompt = await this.get<Prompt>('SELECT * FROM prompts WHERE id = ?', [id]);
+    type DBPrompt = Omit<Prompt, 'tags'> & { tags: string };
+    const prompt = await this.get<DBPrompt>('SELECT * FROM prompts WHERE id = ?', [id]);
     if (!prompt) return null;
     return {
       ...prompt,
-      tags: prompt.tags ? JSON.parse(prompt.tags) : [],
+      tags: prompt.tags ? prompt.tags.split(',').map(tag => tag.trim()).filter(Boolean) : [],
       isActive: Boolean(prompt.isActive)
     };
   }
 
   async createPrompt(prompt: Prompt): Promise<void> {
-    const tags = JSON.stringify(prompt.tags);
+    const tags = Array.isArray(prompt.tags) ? prompt.tags.filter(Boolean).join(',') : '';
     await this.run(
       'INSERT INTO prompts (id, title, description, content, tags, created, lastModified, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
       [prompt.id, prompt.title, prompt.description, prompt.content, tags, prompt.created, prompt.lastModified, prompt.isActive ? 1 : 0]
@@ -184,7 +186,7 @@ class Database {
   }
 
   async updatePrompt(prompt: Prompt): Promise<void> {
-    const tags = JSON.stringify(prompt.tags);
+    const tags = Array.isArray(prompt.tags) ? prompt.tags.filter(Boolean).join(',') : '';
     const exists = await this.getPromptById(prompt.id);
     if (!exists) {
       throw new Error(`Prompt with id ${prompt.id} not found`);

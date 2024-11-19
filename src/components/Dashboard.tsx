@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Eye, Search } from 'lucide-react';
 import { Prompt } from '../types';
+import { TagList } from './Tag';
 
 interface DashboardProps {
   prompts: Prompt[];
@@ -22,15 +23,16 @@ const PromptCard = ({ prompt, onClick }: { prompt: Prompt; onClick: () => void }
       <p className="mt-2 text-sm text-slate-600 line-clamp-2">
         {prompt.description}
       </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {prompt.tags.map((tag) => (
-          <span
-            key={tag}
-            className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700"
-          >
-            {tag}
-          </span>
-        ))}
+      <div className="mt-4">
+        <TagList 
+          tags={prompt.tags}
+          showIcons={true}
+          tagStyle={{
+            backgroundColor: '#D5FFFF',
+            color: '#1D4ED8',
+            border: '1px solid rgba(29, 78, 216, 0.1)'
+          }}
+        />
       </div>
     </div>
   </div>
@@ -40,6 +42,7 @@ const Dashboard = ({ prompts }: DashboardProps) => {
   const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>(null);
   const [copied, setCopied] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState('');
 
   // Filter active prompts first, then apply search filter
   const filteredPrompts = prompts
@@ -51,14 +54,12 @@ const Dashboard = ({ prompts }: DashboardProps) => {
     );
 
   const handleCopy = async () => {
-    if (selectedPrompt) {
-      try {
-        await navigator.clipboard.writeText(selectedPrompt.content);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
-      } catch (err) {
-        console.error('Failed to copy text:', err);
-      }
+    try {
+      await navigator.clipboard.writeText(selectedPrompt?.content || '');
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      setError('Failed to copy text to clipboard');
     }
   };
 
@@ -148,15 +149,16 @@ const Dashboard = ({ prompts }: DashboardProps) => {
                     </pre>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {selectedPrompt.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  <div className="mt-4">
+                    <TagList 
+                      tags={selectedPrompt.tags}
+                      showIcons={true}
+                      tagStyle={{
+                        backgroundColor: '#D5FFFF',
+                        color: '#1D4ED8',
+                        border: '1px solid rgba(29, 78, 216, 0.1)'
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -197,6 +199,9 @@ const Dashboard = ({ prompts }: DashboardProps) => {
             </div>
           </div>
         </div>
+      )}
+      {error && (
+        <div className="text-red-500 text-sm">{error}</div>
       )}
     </div>
   );

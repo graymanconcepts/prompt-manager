@@ -25,6 +25,7 @@ const NewPromptModal: React.FC<NewPromptModalProps> = ({ isOpen, onClose, onSave
       tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag !== ''),
       created: new Date().toISOString(),
       lastModified: new Date().toISOString(),
+      isActive: false
     };
     onSave(newPrompt);
     setTitle('');

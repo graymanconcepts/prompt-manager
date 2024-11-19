@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Prompt } from '../types';
+import { TagList } from './Tag';
 
 interface TagAnalytics {
   tag: string;
@@ -53,9 +54,13 @@ export default function AnalyticsView({ prompts }: AnalyticsViewProps) {
                 {tagAnalytics.map(({ tag, count, percentage }) => (
                   <tr key={tag} className="border-b hover:bg-gray-50">
                     <td className="py-2">
-                      <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                        {tag}
-                      </span>
+                      <TagList 
+                        tags={[tag]} 
+                        inline={true}
+                        tagStyle={{
+                          margin: 0
+                        }}
+                      />
                     </td>
                     <td className="py-2">{count}</td>
                     <td className="py-2">{percentage.toFixed(1)}%</td>
