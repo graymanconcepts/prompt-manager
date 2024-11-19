@@ -1,0 +1,911 @@
+{
+  "glossary": [
+    {
+      "category": "Artist Names",
+      "subcategories": [
+        {
+          "option": "Arthur C. Clarke",
+          "description": " Clarke was a science fiction author known for his stories that explored the possibilities of advanced technology and space exploration, and this prompt can generate images with futuristic, high-tech visuals."
+        },
+        {
+          "option": "Calder",
+          "description": " This prompt will create images filled with abstract shapes in primary colors similar to Calder's paintings and mobiles."
+        },
+        {
+          "option": "Chagall",
+          "description": " This prompt can create an image that has a dreamlike appearance with floating figures and whimsical colors, similar to the work of Marc Chagall."
+        },
+        {
+          "option": "Dali",
+          "description": " This prompt can create an image that has a surreal, dreamlike appearance with distorted objects and melting forms, similar to the work of Salvador Dali."
+        },
+        {
+          "option": "Escher",
+          "description": " This prompt can create an image that has a mind-bending, geometric appearance with impossible shapes and optical illusions, similar to the work of M.C. Escher."
+        },
+        {
+          "option": "Frank Frazetta",
+          "description": " Frazetta is a renowned fantasy and science fiction artist, and this prompt can generate images with highly detailed and fantastical elements."
+        },
+        {
+          "option": "Gene Roddenberry",
+          "description": " Roddenberry was the creator of the Star Trek franchise, and this prompt can generate images with futuristic technology and space exploration, with a focus on scientific exploration and discovery."
+        },
+        {
+          "option": "Goya",
+          "description": " This prompt can create an image that has a dark, dramatic appearance with strong use of light and shadow, similar to the work of Francisco Goya."
+        },
+        {
+          "option": "H.R. Giger",
+          "description": " Known for his biomechanical and surreal designs, this prompt can generate images with dark, intricate, and otherworldly visuals."
+        },
+        {
+          "option": "Hokusai",
+          "description": " This prompt can create an image that has a traditional Japanese appearance with delicate lines and soft colors, similar to the work of Katsushika Hokusai."
+        },
+        {
+          "option": "Isaac Asimov",
+          "description": " As one of the most celebrated science fiction authors, this prompt can generate images that evoke a sense of scientific exploration and discovery, as well as futuristic technology."
+        },
+        {
+          "option": "J.G. Ballard",
+          "description": " As an author known for his dystopian and post-apocalyptic themes, this prompt can generate images with a bleak and desolate future world."
+        },
+        {
+          "option": "Kandinsky",
+          "description": " This prompt can create an image that has a vibrant, abstract appearance with bold colors and geometric shapes, similar to the work of Wassily Kandinsky."
+        },
+        {
+          "option": "Klee",
+          "description": " This prompt can create an image that has a playful, childlike appearance with simple shapes and bright colors, similar to the work of Paul Klee."
+        },
+        {
+          "option": "Klimt",
+          "description": " This prompt can create an image that has a luxurious, ornate appearance with intricate patterns and metallic colors, similar to the work of Gustav Klimt."
+        },
+        {
+          "option": "Larry Niven",
+          "description": " Niven is a science fiction author known for his exploration of themes related to space exploration and futuristic technology, and this prompt can generate images with highly detailed and imaginative visuals of advanced technology and space exploration."
+        },
+        {
+          "option": "Magritte",
+          "description": " This prompt can create an image that has a surreal appearance with unexpected combinations of objects and imagery, similar to the work of Rene Magritte."
+        },
+        {
+          "option": "Matisse",
+          "description": " This prompt can create an image that has a playful, colorful appearance with bold shapes and patterns, similar to the work of Henri Matisse."
+        },
+        {
+          "option": "Moebius",
+          "description": " Known for his futuristic and surreal designs, this prompt can generate images with highly stylized and abstract visuals."
+        },
+        {
+          "option": "Monet",
+          "description": " This prompt can create an image that has a soft, hazy appearance with pastel colors and a sense of tranquility, similar to the work of Claude Monet."
+        },
+        {
+          "option": "Neal Stephenson",
+          "description": " As an author known for his exploration of themes related to advanced technology and alternate realities, this prompt can generate images with highly detailed and imaginative technology and futuristic landscapes."
+        },
+        {
+          "option": "O'Keeffe",
+          "description": " This prompt can create an image that has a soft, sensual appearance with organic forms and muted colors, similar to the work of Georgia O'Keeffe."
+        },
+        {
+          "option": "Philip K. Dick",
+          "description": " Known for his exploration of themes related to artificial intelligence and alternate realities, this prompt can generate images with surreal and thought-provoking visuals."
+        },
+        {
+          "option": "Picasso",
+          "description": " This prompt can create an image that has a fragmented, abstract appearance with bold shapes and colors, similar to the work of Pablo Picasso."
+        },
+        {
+          "option": "Pollock",
+          "description": " This prompt can create an image that has a chaotic, energetic appearance with splatters and drips of color, similar to the work of Jackson Pollock."
+        },
+        {
+          "option": "Ralph McQuarrie",
+          "description": " McQuarrie was an artist and designer who worked on the Star Wars franchise, and this prompt can generate images with futuristic technology and space exploration."
+        },
+        {
+          "option": "Rembrandt",
+          "description": " This prompt can create an image that has a dramatic, high-contrast look with strong use of light and shadow, similar to the work of Rembrandt."
+        },
+        {
+          "option": "Ridley Scott",
+          "description": " Scott is a filmmaker who has directed several science fiction films, including Blade Runner and Alien, and this prompt can generate images with cinematic and dramatic visuals, with a focus on futuristic technology and space exploration."
+        },
+        {
+          "option": "Rothko",
+          "description": " This prompt can create an image that has a minimalistic, color-field appearance with large areas of flat color, similar to the work of Mark Rothko."
+        },
+        {
+          "option": "Seurat",
+          "description": " This prompt can create an image that has a pointillist appearance with tiny dots of color that blend together from a distance, similar to the work of Georges Seurat."
+        },
+        {
+          "option": "Stanislaw Lem",
+          "description": " Lem was a science fiction author known for his explorations of themes related to artificial intelligence and space exploration, and this prompt can generate images with surreal and thought-provoking visuals."
+        },
+        {
+          "option": "Syd Mead",
+          "description": " Mead was an artist and designer known for his work on science fiction films, and this prompt can generate images with highly detailed and imaginative technology and futuristic landscapes."
+        },
+        {
+          "option": "Van Gogh",
+          "description": " This prompt can create an image that has thick, expressive brushstrokes with bold colors, similar to the work of Vincent van Gogh."
+        },
+        {
+          "option": "Warhol",
+          "description": " This prompt can create an image that has a pop-art appearance with bright colors and repeated patterns, similar to the work of Andy Warhol."
+        },
+        {
+          "option": "William Gibson",
+          "description": " As a writer of cyberpunk fiction, this prompt can generate images with gritty, dystopian urban landscapes, and advanced technology."
+        }
+      ]
+    },
+    {
+      "category": "Artistic Media",
+      "subcategories": [
+        {
+          "option": "Acrylic painting",
+          "description": " This style emulates the look of an acrylic painting, with bright, bold colors and a slightly textured quality."
+        },
+        {
+          "option": "Chalk Drawing",
+          "description": " This style emulates the look of a chalk drawing, with soft lines and a textured aesthetic."
+        },
+        {
+          "option": "Charcoal",
+          "description": " This style emulates the look of a charcoal drawing, with a soft, smudgy quality and muted colors."
+        },
+        {
+          "option": "Charcoal Drawing",
+          "description": " This style emulates the look of a charcoal drawing, with soft lines and a smudged aesthetic."
+        },
+        {
+          "option": "Collage",
+          "description": " This style uses a combination of materials and textures to create a layered, multidimensional effect."
+        },
+        {
+          "option": "Color Pencil Drawing",
+          "description": " This style emulates the look of a traditional color pencil drawing, with vivid colors and a textured aesthetic."
+        },
+        {
+          "option": "Digital Painting",
+          "description": " This style emulates the look of a traditional painting, with thick brushstrokes and a rich color palette."
+        },
+        {
+          "option": "Ink",
+          "description": " This style emulates the look of an ink drawing, with bold lines and a graphic, high-contrast quality."
+        },
+        {
+          "option": "Line Drawing",
+          "description": " Line drawings typically feature only outlines and minimal shading, creating a minimalist and graphic aesthetic. This style is often used for technical drawings or illustrations that require clear, simple imagery. In AI-generated line drawings, the lines may vary in thickness and style depending on the specific algorithm or model being used."
+        },
+        {
+          "option": "Mixed media",
+          "description": " This style combines multiple media types, often using a variety of textures and materials to create a layered, collage-like effect."
+        },
+        {
+          "option": "Oil painting",
+          "description": " This style emulates the look of a traditional oil painting, with thick brushstrokes and vivid colors."
+        },
+        {
+          "option": "Pastel",
+          "description": " The image would have a soft and delicate appearance, with a focus on pastel colors and gentle lighting."
+        },
+        {
+          "option": "Pastel Drawing",
+          "description": " This style emulates the look of a pastel drawing, with a soft, delicate quality and subtle, blended colors."
+        },
+        {
+          "option": "Pen and Ink",
+          "description": " This style emulates the look of an ink drawing, with bold lines and a high contrast aesthetic."
+        },
+        {
+          "option": "Pencil Sketch",
+          "description": " This style emulates the look of a traditional pencil sketch, with soft lines and a minimalistic aesthetic."
+        },
+        {
+          "option": "Sketch",
+          "description": " This style emulates the look of a pencil sketch, with a simple, minimalist quality and clean lines."
+        },
+        {
+          "option": "Spray paint",
+          "description": " This style will render a similar effect to what you would get using a can of spray paint to create an image as in graffiti art or wildstyle."
+        },
+        {
+          "option": "Watercolor Painting",
+          "description": " This style emulates the look of a watercolor painting, with soft lines and a fluid, ethereal aesthetic."
+        }
+      ]
+    },
+    {
+      "category": "Artistic Style",
+      "subcategories": [
+        {
+          "option": "Abstract",
+          "description": " This style emphasizes form and color over representation, often using bold shapes and vibrant colors."
+        },
+        {
+          "option": "Art Nouveau",
+          "description": " The image would likely feature organic shapes and flowing lines, with a focus on decorative elements such as flowers, vines, and curved lines."
+        },
+        {
+          "option": "Baroque",
+          "description": " The image would have a grand and ornate appearance, featuring highly detailed decoration, exaggerated curves, and opulent details such as gold leaf and elaborate patterns."
+        },
+        {
+          "option": "Bright",
+          "description": " The image would have a bold and colorful appearance, with a focus on bright and vivid hues."
+        },
+        {
+          "option": "Cool",
+          "description": " The image would have a crisp and refreshing appearance, with a focus on cool colors and bright lighting."
+        },
+        {
+          "option": "Cubism",
+          "description": " This style emulates the fractured, abstract quality of cubist paintings, with geometric shapes and multiple perspectives."
+        },
+        {
+          "option": "Cyberpunk",
+          "description": " The image would likely have a dark and dystopian appearance, with a focus on high-tech and futuristic elements, such as cybernetic implants and neon lights."
+        },
+        {
+          "option": "Dark",
+          "description": " The image would have a shadowy and moody appearance, with a focus on dark colors and dramatic lighting."
+        },
+        {
+          "option": "Earthy",
+          "description": " The image would have a natural and organic appearance, with a focus on earthy colors and textures."
+        },
+        {
+          "option": "Expressionism",
+          "description": " This style emphasizes the emotions and inner experiences of the artist, often using bold colors and distorted forms."
+        },
+        {
+          "option": "Fantasy",
+          "description": " The image would have a mythical and fantastical appearance, with a focus on magical creatures, landscapes, and elements."
+        },
+        {
+          "option": "Futuristic",
+          "description": " The image would likely have a sleek and high-tech appearance, with a focus on futuristic materials, designs, and technology."
+        },
+        {
+          "option": "Gothic",
+          "description": " The image would likely have a dark and gloomy aesthetic, with elements such as pointed arches, gargoyles, and intricate details commonly found in Gothic architecture."
+        },
+        {
+          "option": "Graffiti",
+          "description": " This style emulates the bold, graphic quality of graffiti art, often using bright colors and urban imagery."
+        },
+        {
+          "option": "Grunge",
+          "description": " The image would have a rough and raw appearance, with a focus on gritty textures, distressed materials, and a darker color palette."
+        },
+        {
+          "option": "Impressionism",
+          "description": " This style emulates the loose, expressive brushstrokes and dreamy quality of impressionist paintings."
+        },
+        {
+          "option": "Light",
+          "description": " The image would have a bright and airy appearance, with a focus on light colors and soft lighting."
+        },
+        {
+          "option": "Marker Drawing",
+          "description": " This style emulates the look of a marker drawing, with bold lines and a graphic aesthetic."
+        },
+        {
+          "option": "Minimalism",
+          "description": " This style emphasizes simplicity and negative space, often using clean lines and muted colors."
+        },
+        {
+          "option": "Modern",
+          "description": " The image would have a sleek and minimalist appearance, with a focus on clean lines and simple forms. The image may also incorporate modern materials and technology."
+        },
+        {
+          "option": "Moody",
+          "description": " The image would have a dramatic and emotional appearance, with a focus on dark colors and intense lighting."
+        },
+        {
+          "option": "Neon",
+          "description": " The image would have a bright and vibrant appearance, with a focus on glowing neon lights and bold colors."
+        },
+        {
+          "option": "Pointillism",
+          "description": " This style emulates the technique of pointillism, using small dots of color to create a larger image with a unique, textured quality."
+        },
+        {
+          "option": "Pop art",
+          "description": " This style emulates the bold, graphic quality of pop art, with bright colors and iconic imagery."
+        },
+        {
+          "option": "Realism",
+          "description": " This style emulates the look of a realistic painting, with accurate proportions, lighting, and details."
+        },
+        {
+          "option": "Renaissance",
+          "description": " The image would have a classical appearance, with an emphasis on balance, symmetry, and proportion. The image may feature classical motifs such as columns, arches, and domes."
+        },
+        {
+          "option": "Retro",
+          "description": " The image would have a vintage appearance, with a focus on designs and styles from a particular era, such as the 1950s or 1960s."
+        },
+        {
+          "option": "Romanticism",
+          "description": " The image would have an emotional and expressive quality, with a focus on dramatic and intense scenes, nature, and human emotions."
+        },
+        {
+          "option": "Sci-fi",
+          "description": " The image would have a futuristic and high-tech appearance, with a focus on advanced technology, spaceships"
+        },
+        {
+          "option": "Steampunk",
+          "description": " The image would have a Victorian-era appearance, with a focus on steam-powered technology, industrial design, and brass and copper materials."
+        },
+        {
+          "option": "Street art",
+          "description": " This style encompasses a variety of techniques used in public spaces, often using unexpected materials and locations to create a unique, site-specific effect."
+        },
+        {
+          "option": "Surrealism",
+          "description": " This style emphasizes the bizarre and dreamlike, often using unexpected combinations of objects and fantastical landscapes."
+        },
+        {
+          "option": "Victorian",
+          "description": " The image would likely feature highly detailed and ornate designs, with a focus on decorative elements such as lace, frills, and floral patterns."
+        },
+        {
+          "option": "Vintage",
+          "description": " The image would have an aged appearance, with a focus on designs and styles from an earlier era, such as the 1920s or 1930s."
+        },
+        {
+          "option": "Warm",
+          "description": " The image would have a cozy and inviting appearance, with a focus on warm colors and soft lighting."
+        },
+        {
+          "option": "Whimsical",
+          "description": " The image would have a playful and fanciful appearance, with a focus on imaginative and whimsical designs."
+        }
+      ]
+    },
+    {
+      "category": "Atmosphere/Mood",
+      "subcategories": [
+        {
+          "option": "Angry",
+          "description": " This prompt is used to generate images with bold colors and aggressive compositions, often featuring confrontational figures or explosive scenes."
+        },
+        {
+          "option": "Calm",
+          "description": " This prompt is used to generate images with soothing colors and a sense of tranquility or peace, often featuring serene natural settings or calming imagery."
+        },
+        {
+          "option": "Cloudy",
+          "description": " A cloudy atmosphere creates a diffuse light with reduced contrast and can make colors appear cooler and more subdued. It can add a sense of tranquility or a sense of foreboding depending on the context."
+        },
+        {
+          "option": "Confused",
+          "description": " This prompt is used to generate images with disorienting compositions and a sense of confusion or disarray, often featuring chaotic scenes or conflicting elements."
+        },
+        {
+          "option": "Dawn",
+          "description": " A dawn atmosphere creates a soft and delicate look, with gentle light and pastel colors. Dawn images can have a sense of new beginnings and tranquility."
+        },
+        {
+          "option": "Dreamy",
+          "description": " The image would have a romantic and surreal appearance, with a focus on soft colors and hazy lighting."
+        },
+        {
+          "option": "Dusk",
+          "description": " A dusk atmosphere creates a warm and moody look, with soft golden light and long shadows. Dusk images can have a sense of peace and quietness."
+        },
+        {
+          "option": "Energetic",
+          "description": " This prompt is used to generate images with bold, bright colors and dynamic compositions, often featuring active people or exciting scenes."
+        },
+        {
+          "option": "Ethereal",
+          "description": " An ethereal atmosphere can create a delicate and otherworldly look, with a sense of lightness and transparency."
+        },
+        {
+          "option": "Excited",
+          "description": " This prompt is used to generate images with vibrant, energetic colors and a sense of anticipation or excitement, often featuring dynamic compositions or active figures."
+        },
+        {
+          "option": "Foggy",
+          "description": " A foggy atmosphere creates a soft, diffuse look with reduced visibility, often with a misty haze and muted colors."
+        },
+        {
+          "option": "Gloomy",
+          "description": " A gloomy atmosphere can create a dark and brooding look, with muted colors and reduced contrast. Gloomy images can have a sense of sadness or foreboding."
+        },
+        {
+          "option": "Happy",
+          "description": " This prompt is used to generate images with bright and cheerful colors, often featuring smiling faces or playful scenes."
+        },
+        {
+          "option": "Hazy",
+          "description": " A hazy atmosphere has a soft, muted appearance and can make colors appear desaturated and muted. It can create a sense of distance and depth, as well as a dreamy, romantic mood."
+        },
+        {
+          "option": "Hopeful",
+          "description": " This prompt is used to generate images with bright, optimistic colors and a sense of possibility or promise, often featuring uplifting imagery or inspiring settings."
+        },
+        {
+          "option": "Intense",
+          "description": " This prompt is used to generate images with dramatic lighting and strong contrasts, often featuring powerful emotions or extreme situations."
+        },
+        {
+          "option": "Magical",
+          "description": " A magical atmosphere can create a whimsical and enchanting look, with a sense of fantasy and wonder."
+        },
+        {
+          "option": "Melancholic",
+          "description": " This prompt is used to generate images with subdued colors and a sense of sadness or introspection, often featuring solitary figures or empty spaces."
+        },
+        {
+          "option": "Misty",
+          "description": " A misty atmosphere creates a similar effect to fog, but with finer droplets and a more delicate appearance. Misty scenes can have a sense of tranquility and mystery. Hazy A hazy atmosphere has a soft, muted appearance and can make colors appear desaturated and muted. It can create a sense of distance and depth, as well as a dreamy, romantic mood."
+        },
+        {
+          "option": "Mysterious",
+          "description": " A mysterious atmosphere can create an enigmatic and intriguing look, with a sense of the unknown and the supernatural."
+        },
+        {
+          "option": "Nervous",
+          "description": " This prompt is used to generate images with tense, jittery compositions and an unsettling atmosphere, often featuring disturbing imagery or unsettling subjects."
+        },
+        {
+          "option": "Nighttime",
+          "description": " A nighttime atmosphere can create a dark and mysterious look, with deep shadows and points of light. Nighttime images can have a sense of wonder and intrigue."
+        },
+        {
+          "option": "Nostalgic",
+          "description": " This prompt is used to generate images with muted colors and a vintage feel, often featuring old-fashioned settings or objects."
+        },
+        {
+          "option": "Playful",
+          "description": " This prompt is used to generate images with bright colors and a sense of fun or playfulness, often featuring toys or childlike imagery."
+        },
+        {
+          "option": "Rainy",
+          "description": " A rainy atmosphere can create a sense of tranquility, melancholy, or romanticism, with soft raindrops, reflections, and muted colors."
+        },
+        {
+          "option": "Romantic",
+          "description": " This prompt is used to generate images with soft, dreamy lighting and pastel colors, often featuring couples or romantic scenes."
+        },
+        {
+          "option": "Sad",
+          "description": " This prompt is used to generate images with muted and somber colors, often featuring solitary figures or desolate landscapes."
+        },
+        {
+          "option": "Serene",
+          "description": " This prompt is used to generate images with peaceful, calming colors and soft lighting, often featuring nature scenes or tranquil settings."
+        },
+        {
+          "option": "Smoky",
+          "description": " A smoky atmosphere can create a dramatic and moody look, with a haze of particles that can obscure details and add depth to the image."
+        },
+        {
+          "option": "Snowy",
+          "description": " A snowy atmosphere can create a crisp, clean look with a bright, reflective quality. Snowy images can have a serene and peaceful feel."
+        },
+        {
+          "option": "Stormy",
+          "description": " A stormy atmosphere can create a sense of drama and tension, with dark skies, rain, lightning, and strong winds. Stormy images can have a powerful and dynamic look."
+        },
+        {
+          "option": "Sunny",
+          "description": " A sunny atmosphere can create a bright and cheerful look with strong contrast and vivid colors. Sunny images can have a sense of energy and vitality."
+        },
+        {
+          "option": "Sunrise",
+          "description": " A sunrise atmosphere creates a fresh and hopeful look, with warm colors and a sense of renewal. Sunrise images can have a sense of optimism and energy."
+        },
+        {
+          "option": "Sunset",
+          "description": " A sunset atmosphere creates a warm and nostalgic look, with rich colors and a sense of completion. Sunset images can have a sense of beauty and closure."
+        },
+        {
+          "option": "Tense",
+          "description": " This prompt is used to generate images with dramatic lighting and a sense of anticipation or tension, often featuring suspenseful or thrilling scenes."
+        },
+        {
+          "option": "Thoughtful",
+          "description": " This prompt is used to generate images with muted colors and a sense of introspection or contemplation, often featuring solitary figures or quiet scenes."
+        },
+        {
+          "option": "Twilight",
+          "description": " A twilight atmosphere creates a soft and subtle look, with a balance between light and shadow. Twilight images can have a sense of transition and contemplation."
+        }
+      ]
+    },
+    {
+      "category": "Creative Work",
+      "subcategories": [
+        {
+          "option": "Assassin's Creed",
+          "description": " This design style is based on the historical settings and parkour-inspired gameplay of the Assassin's Creed series. The effect is a mix of realistic and fantastical elements, with detailed recreations of historic landmarks and an emphasis on stealth and agility."
+        },
+        {
+          "option": "Black Mirror",
+          "description": " This design style is based on the dystopian, technology-driven world of Black Mirror. The effect is a dark, ominous look with a focus on high-tech gadgets, digital interfaces, and oppressive governments."
+        },
+        {
+          "option": "Blade Runner",
+          "description": " This design style is based on the neon-lit, dystopian future of the Blade Runner movies. The effect is a moody, atmospheric look with a focus on urban decay, futuristic technology, and noir-inspired lighting."
+        },
+        {
+          "option": "Breaking Bad",
+          "description": " This design style is based on the gritty, crime-filled world of Breaking Bad. The effect is a dark, realistic look with a focus on meth labs, drug cartels, and morally ambiguous characters."
+        },
+        {
+          "option": "Call of Duty",
+          "description": " This design style is based on the military themes and realistic graphics of the Call of Duty series. The effect is a gritty, intense look with a focus on combat and weaponry."
+        },
+        {
+          "option": "Final Fantasy",
+          "description": " This design style is based on the lush, detailed environments and character designs of the Final Fantasy series. The effect is a fantasy-inspired aesthetic with ornate costumes, magical creatures, and intricate landscapes."
+        },
+        {
+          "option": "Fortnite",
+          "description": " This design style is based on the colorful, cartoonish graphics and over-the-top action of the game Fortnite. The effect is a lively, energetic look with bold colors, exaggerated shapes, and whimsical characters."
+        },
+        {
+          "option": "Friends",
+          "description": " This design style is based on the cozy, retro world of Friends. The effect is a warm, inviting look with a focus on coffee shops, cozy apartments, and quirky characters."
+        },
+        {
+          "option": "Game of Thrones",
+          "description": " This design style is based on the medieval fantasy world of Game of Thrones. The effect is a gritty, realistic look with a focus on epic battles, mythical creatures, and medieval castles."
+        },
+        {
+          "option": "Grand Theft Auto",
+          "description": " This design style is based on the gritty, urban environments of the Grand Theft Auto series. The effect is a dark, moody look with a focus on street-level details like graffiti and storefronts."
+        },
+        {
+          "option": "Halo",
+          "description": " This design style is based on the futuristic sci-fi settings and alien creatures of the Halo series. The effect is a sleek, high-tech look with glowing energy fields, metallic surfaces, and alien artifacts."
+        },
+        {
+          "option": "Harry Potter",
+          "description": " This design style is based on the magical, fantastical world of the Harry Potter movies. The effect is a whimsical, enchanting look with a focus on spells, potions, and magical creatures."
+        },
+        {
+          "option": "Indiana Jones",
+          "description": " This design style is based on the adventurous, globe-trotting world of the Indiana Jones movies. The effect is a retro-inspired look with a focus on exotic locations, ancient artifacts, and daring action."
+        },
+        {
+          "option": "Jurassic Park",
+          "description": " This design style is based on the prehistoric, dinosaur-filled world of the Jurassic Park movies. The effect is a lush, tropical look with a focus on realistic dinosaur designs and natural landscapes."
+        },
+        {
+          "option": "Mad Men",
+          "description": " This design style is based on the stylish, mid-century world of Mad Men. The effect is a sleek, sophisticated look with a focus on 1960s fashion, vintage cars, and stylish office environments."
+        },
+        {
+          "option": "Minecraft",
+          "description": " This design style is based on the blocky, pixelated graphics of the game Minecraft. The effect is a low-resolution, retro look with vibrant colors and simple shapes."
+        },
+        {
+          "option": "Pirates of the Caribbean",
+          "description": " This design style is based on the swashbuckling, pirate-filled world of the Pirates of the Caribbean movies. The effect is a lively, colorful look with a focus on pirate ships, tropical islands, and nautical adventure."
+        },
+        {
+          "option": "Pokemon",
+          "description": " This design style is based on the cute, colorful creatures and vibrant environments of the Pokemon series. The effect is a playful, lighthearted look with a focus on cute animals and natural landscapes."
+        },
+        {
+          "option": "Star Wars",
+          "description": " This design style is based on the sci-fi/fantasy world of the Star Wars movies. The effect is a space opera-inspired look with intricate spacecraft, otherworldly landscapes, and characters with distinct costumes and weapons."
+        },
+        {
+          "option": "Stranger Things",
+          "description": " This design style is based on the retro, sci-fi world of Stranger Things. The effect is a nostalgic, '80s-inspired look with a focus on supernatural events, small-town America, and dark, moody lighting."
+        },
+        {
+          "option": "The Avengers",
+          "description": " This design style is based on the superhero team-up world of The Avengers movies. The effect is a dynamic, action-packed look with a focus on brightly-colored superhero costumes, high-tech gadgets, and epic battles."
+        },
+        {
+          "option": "The Crown",
+          "description": " This design style is based on the regal, historical world of The Crown. The effect is a grand, opulent look with a focus on royal palaces, lavish costumes, and dramatic political intrigue."
+        },
+        {
+          "option": "The Hunger Games",
+          "description": " This design style is based on the dystopian, post-apocalyptic world of The Hunger Games movies. The effect is a bleak, gritty look with a focus on oppressive government regimes, gritty urban environments, and survivalist tactics."
+        },
+        {
+          "option": "The Legend of Zelda",
+          "description": " This design style is based on the whimsical, magical environments and characters of The Legend of Zelda series. The effect is a playful, fantasy-inspired look with a focus on exploration and adventure."
+        },
+        {
+          "option": "The Lord of the Rings",
+          "description": " This design style is based on the epic, high-fantasy world of The Lord of the Rings movies. The effect is a grand, immersive look with a focus on ancient landscapes, mythical creatures, and epic battles."
+        },
+        {
+          "option": "The Matrix",
+          "description": " This design style is based on the futuristic, cyberpunk aesthetic of The Matrix movies. The effect is a dark, edgy look with a focus on technology, code, and virtual reality."
+        },
+        {
+          "option": "The Office",
+          "description": " This design style is based on the workplace world of The Office. The effect is a simple, straightforward look with a focus on mundane office environments, quirky characters, and awkward social situations."
+        },
+        {
+          "option": "The Walking Dead",
+          "description": " This design style is based on the post-apocalyptic world of The Walking Dead. The effect is a bleak, desolate look with a focus on zombies, abandoned cities, and survivalist tactics."
+        },
+        {
+          "option": "Westworld",
+          "description": " This design style is based on the futuristic, AI-filled world of Westworld. The effect is a sleek, high-tech look with a focus on androids, futuristic cities, and virtual reality."
+        },
+        {
+          "option": "World of Warcraft",
+          "description": " This design style is based on the elaborate, fantastical world-building and character customization of World of Warcraft. The effect is a highly detailed, immersive look with a focus on magic, monsters, and heroic characters."
+        }
+      ]
+    },
+    {
+      "category": "Lighting",
+      "subcategories": [
+        {
+          "option": "Ambient lighting",
+          "description": " This prompt creates a general, overall illumination that simulates the effect of being in a particular environment."
+        },
+        {
+          "option": "Artificial lighting",
+          "description": " This prompt generates the effect of artificial light sources, such as lamps or neon lights, creating a modern and urban atmosphere."
+        },
+        {
+          "option": "Backlighting",
+          "description": " This prompt illuminates the subject from behind, creating a halo-like effect that adds depth and drama to the image."
+        },
+        {
+          "option": "Candlelight",
+          "description": " This prompt simulates the warm and flickering effect of candlelight, creating a cozy and intimate atmosphere."
+        },
+        {
+          "option": "Chiaroscuro lighting",
+          "description": " This prompt creates a striking and dramatic effect by using strong contrasts between light and dark areas."
+        },
+        {
+          "option": "Color lighting",
+          "description": " This prompt adds a specific color or color scheme to the lighting, creating a specific mood or atmosphere."
+        },
+        {
+          "option": "Diffused lighting",
+          "description": " This prompt softens the light and creates a gentle, natural-looking effect."
+        },
+        {
+          "option": "Directional lighting",
+          "description": " This prompt creates a strong sense of directionality and emphasizes the subject's shape and form."
+        },
+        {
+          "option": "Fluorescent lighting",
+          "description": " This prompt simulates the effect of fluorescent light sources, creating a cool and sterile atmosphere."
+        },
+        {
+          "option": "Hard lighting",
+          "description": " This prompt creates sharp and well-defined shadows that create a sense of drama and tension."
+        },
+        {
+          "option": "High-key lighting",
+          "description": " This prompt creates a bright and airy effect by using mostly light tones and minimal shadows."
+        },
+        {
+          "option": "Low-key lighting",
+          "description": " This prompt creates a moody and dramatic effect by using deep shadows and a limited range of tones."
+        },
+        {
+          "option": "Mood lighting",
+          "description": " This prompt creates a specific mood or atmosphere by using lighting to enhance the emotions conveyed by the image."
+        },
+        {
+          "option": "Natural lighting",
+          "description": " This prompt simulates the effect of sunlight or moonlight, creating a warm and organic atmosphere."
+        },
+        {
+          "option": "Naturalistic lighting",
+          "description": " This prompt simulates the effect of natural light sources in a specific environment, creating a sense of realism and immersion."
+        },
+        {
+          "option": "Rembrandt lighting",
+          "description": " This prompt creates a dramatic and classic effect by using a specific type of side lighting that creates a triangle of light on the subject's cheek."
+        },
+        {
+          "option": "Rim lighting",
+          "description": " This prompt illuminates the subject from the side or back, creating a glowing outline around the subject and adding depth and drama to the image."
+        },
+        {
+          "option": "Side lighting",
+          "description": " This prompt illuminates the subject from the side, creating a sense of dimensionality and highlighting the subject's features."
+        },
+        {
+          "option": "Soft lighting",
+          "description": " This prompt creates a gentle, diffused light that reduces harsh shadows and creates a dreamy atmosphere."
+        },
+        {
+          "option": "Spotlight",
+          "description": " This prompt creates a focused beam of light that draws attention to a specific area or subject in the image."
+        },
+        {
+          "option": "Sunrise lighting",
+          "description": " This prompt simulates the cool and misty effect of a sunrise, creating a fresh and optimistic atmosphere."
+        },
+        {
+          "option": "Sunset lighting",
+          "description": " This prompt simulates the warm and golden effect of a sunset, creating a romantic and nostalgic atmosphere."
+        },
+        {
+          "option": "Three-point lighting",
+          "description": " This prompt uses three sources of light (key, fill, and backlight) to create a well-balanced and dynamic effect."
+        },
+        {
+          "option": "Top lighting",
+          "description": " This prompt illuminates the subject from above, creating a strong sense of directionality and emphasizing the subject's shape."
+        },
+        {
+          "option": "Tungsten lighting",
+          "description": " This prompt simulates the effect of tungsten light sources, creating a warm and cozy atmosphere."
+        }
+      ]
+    },
+    {
+      "category": "Photographic",
+      "subcategories": [
+        {
+          "option": "3D",
+          "description": " This prompt will generate an image that looks three-dimensional, with depth and perspective."
+        },
+        {
+          "option": "Aperture",
+          "description": " Refers to the size of the opening in the lens through which light passes to enter the camera. Using this prompt in AI image generation tools can produce an effect where the image has a shallow or deep depth of field, depending on the selected aperture value."
+        },
+        {
+          "option": "Aspect ratio",
+          "description": " Aspect ratio will determine what the dimensions of the final image are. By default BlueWillow generates square images. You can create a portait image with the prompt"
+        },
+        {
+          "option": "Black and white",
+          "description": " The absence of color, used to emphasize shapes, textures, and contrast in the image."
+        },
+        {
+          "option": "Bokeh",
+          "description": " Aesthetic quality of the blur produced in the out-of-focus parts of an image, often used to create a sense of depth or a dreamy atmosphere."
+        },
+        {
+          "option": "Color filter",
+          "description": " A tint or hue added to the image to create a specific mood or atmosphere."
+        },
+        {
+          "option": "Contrast",
+          "description": " Refers to the difference in brightness between the light and dark areas of an image. Using this prompt in AI image generation tools can produce an effect where the image has high or low contrast, depending on the selected value."
+        },
+        {
+          "option": "Depth of field",
+          "description": " Refers to the range of distance in an image where objects appear acceptably sharp. Using this prompt in AI image generation tools can produce an effect where only the subject is in focus while the background is blurred."
+        },
+        {
+          "option": "Exposure",
+          "description": " Amount of light that enters the camera, can be adjusted to create a brighter or darker image."
+        },
+        {
+          "option": "Exposure compensation",
+          "description": " Refers to the adjustment of exposure settings to produce a desired level of brightness in the image. Using this prompt in AI image generation tools can produce an effect where the image is overexposed or underexposed, depending on the selected compensation value."
+        },
+        {
+          "option": "Grainy",
+          "description": " Texture produced by film or digital noise, giving the image a vintage or gritty feel."
+        },
+        {
+          "option": "HDR",
+          "description": " High Dynamic Range imaging technique that captures a greater range of brightness and contrast in the image, resulting in a more detailed and realistic picture."
+        },
+        {
+          "option": "High Definition",
+          "description": " This prompt will generate an image with extremely high resolution, allowing for fine details to be seen clearly."
+        },
+        {
+          "option": "High contrast",
+          "description": " Emphasizes the difference between the light and dark areas of the image, resulting in a more dramatic and impactful picture."
+        },
+        {
+          "option": "Hyperrealistic",
+          "description": " This prompt will generate an image that looks as close to real life as possible, with accurate colors, lighting, and textures."
+        },
+        {
+          "option": "ISO",
+          "description": " Refers to the sensitivity of the camera's image sensor to light. Using this prompt in AI image generation tools can produce an effect where the image has a fine-grained or noisy appearance, depending on the selected ISO value."
+        },
+        {
+          "option": "Light leak",
+          "description": " Accidental exposure of light to the film or sensor, producing a hazy or dreamy effect."
+        },
+        {
+          "option": "Lighting",
+          "description": " This prompt will generate an image with accurate lighting, which can affect the mood and realism of the image."
+        },
+        {
+          "option": "Long exposure",
+          "description": " Technique that keeps the camera shutter open for a longer period of time, often used to capture motion blur or light trails."
+        },
+        {
+          "option": "Macro",
+          "description": " Close-up photography that captures small details, often used to create a sense of intimacy or fascination with small objects."
+        },
+        {
+          "option": "Materials",
+          "description": " This prompt will generate an image that accurately represents the materials in the scene, such as metal, wood, or fabric."
+        },
+        {
+          "option": "Motion blur",
+          "description": " Technique that intentionally blurs the movement in the image to create a sense of motion or speed."
+        },
+        {
+          "option": "Overexposed",
+          "description": " When too much light enters the camera, resulting in a bright or washed-out image."
+        },
+        {
+          "option": "Reflection",
+          "description": " Image of a mirrored surface, often used to create symmetry, repetition, or a sense of abstraction."
+        },
+        {
+          "option": "Reflections",
+          "description": " This prompt will generate an image that includes reflections, which can make the image appear more lifelike."
+        },
+        {
+          "option": "Saturation",
+          "description": " Intensity of color in the image, can be adjusted to create a vibrant or subdued effect."
+        },
+        {
+          "option": "Sepia",
+          "description": " Brownish tone added to the image to create a nostalgic or antique effect."
+        },
+        {
+          "option": "Shadows",
+          "description": " This prompt will generate an image with accurate shadows, which can add depth and realism to the image."
+        },
+        {
+          "option": "Shallow depth of field",
+          "description": " Technique that focuses on a single subject and blurs the background, creating a sense of depth and separation between the subject and the surroundings."
+        },
+        {
+          "option": "Shutter speed",
+          "description": " Refers to the length of time the camera shutter is open during exposure. Using this prompt in AI image generation tools can produce an effect where the movement is frozen or blurred, depending on the selected shutter speed."
+        },
+        {
+          "option": "Soft focus",
+          "description": " Technique that deliberately blurs the image to create a dreamy or romantic effect, often used in portrait or landscape photography."
+        },
+        {
+          "option": "Surface Details",
+          "description": " This prompt will generate an image with accurate surface details, such as the bumps and creases in clothing or the wrinkles in skin."
+        },
+        {
+          "option": "Textures",
+          "description": " This prompt will generate an image with accurate textures, such as the roughness of a brick wall or the smoothness of glass."
+        },
+        {
+          "option": "Tilt-shift",
+          "description": " Technique that simulates a miniature model or toy-like effect, often used in architectural or landscape photography."
+        },
+        {
+          "option": "Underexposed",
+          "description": " When not enough light enters the camera, resulting in a dark or moody image."
+        },
+        {
+          "option": "Vignette",
+          "description": " Darkening of the edges of the image to draw attention to the center and create a sense of depth or nostalgia."
+        },
+        {
+          "option": "White balance",
+          "description": " Refers to the process of adjusting colors in an image to compensate for the color temperature of the light source. Using this prompt in AI image generation tools can produce an effect where the image has a warm or cool color tone, depending on the selected white balance setting."
+        }
+      ]
+    }
+  ]
+}

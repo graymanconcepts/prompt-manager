@@ -43,14 +43,15 @@ const PromptsView: React.FC<PromptsViewProps> = ({
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {error && <div className="text-red-600">{error}</div>}
-      <div className="mb-8">
+    <div className="p-6">
+      {error && <div className="text-red-600 mb-4">{error}</div>}
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold mb-4">Manage Your Prompts</h1>
         <FileUpload onFileProcess={onAddPrompts} />
       </div>
 
       <div className="overflow-x-auto bg-white rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-4">All Prompts Listing</h2>
+        <h2 className="text-2xl font-bold mb-4">All Prompts Listing</h2>
         <table className="min-w-full table-auto">
           <thead>
             <tr className="bg-gray-50 text-gray-600 text-sm leading-normal">

@@ -37,45 +37,29 @@ export default function AnalyticsView({ prompts }: AnalyticsViewProps) {
 
   return (
     <div className="p-6">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4">Tag Usage Analytics</h2>
-        <div className="bg-white rounded-lg shadow">
-          <div className="p-4">
-            <table className="min-w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left py-2">Tag</th>
-                  <th className="text-left py-2">Count</th>
-                  <th className="text-left py-2">Usage %</th>
-                  <th className="text-left py-2">Distribution</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tagAnalytics.map(({ tag, count, percentage }) => (
-                  <tr key={tag} className="border-b hover:bg-gray-50">
-                    <td className="py-2">
-                      <TagList 
-                        tags={[tag]} 
-                        inline={true}
-                        tagStyle={{
-                          margin: 0
-                        }}
-                      />
-                    </td>
-                    <td className="py-2">{count}</td>
-                    <td className="py-2">{percentage.toFixed(1)}%</td>
-                    <td className="py-2 w-1/3">
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
-                        <div
-                          className="bg-blue-600 h-2.5 rounded-full"
-                          style={{ width: `${percentage}%` }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <h1 className="text-2xl font-bold mb-4">Analytics</h1>
+      
+      <div className="space-y-6">
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <h2 className="text-xl font-semibold mb-4">Tag Usage Statistics</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {tagAnalytics.map((tagStat, index) => (
+              <div key={index} className="bg-gray-50 rounded-md p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="font-medium">{tagStat.tag}</span>
+                  <span className="text-gray-500 text-sm">{tagStat.percentage.toFixed(1)}%</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    className="bg-blue-600 h-2 rounded-full"
+                    style={{ width: `${tagStat.percentage}%` }}
+                  />
+                </div>
+                <div className="text-gray-600 text-sm mt-1">
+                  Used in {tagStat.count} prompt{tagStat.count !== 1 ? 's' : ''}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

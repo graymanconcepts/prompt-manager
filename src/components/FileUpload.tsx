@@ -140,40 +140,46 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
   }, [processFile]);
 
   return (
-    <div
-      className={`relative border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
-        isDragging 
-          ? 'border-blue-500 bg-blue-50' 
-          : 'border-gray-300 hover:border-blue-500'
-      }`}
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-      role="presentation"
-    >
-      <input
-        type="file"
-        id="file-upload"
-        className="hidden"
-        onChange={handleChange}
-        accept=".txt,.json,.md,.markdown"
-        multiple
-      />
-      <label
-        htmlFor="file-upload"
-        className="cursor-pointer flex flex-col items-center"
-      >
-        <Upload className={`h-12 w-12 mb-3 ${
-          isDragging ? 'text-blue-500' : 'text-gray-400'
-        }`} />
-        <span className="text-sm text-gray-600">
-          Drop files here or click to upload
-        </span>
-        <span className="text-xs text-gray-500 mt-1">
-          Supports .txt, .json, and .md files
-        </span>
-      </label>
+    <div className="mt-4">
+      <div className="flex gap-8 items-start">
+        <div
+          className={`relative border-2 border-dashed rounded-lg p-8 flex justify-center items-center transition-colors w-[500px]
+            ${isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'}`}
+          onDragOver={handleDragOver}
+          onDragEnter={() => setIsDragging(true)}
+          onDragLeave={() => setIsDragging(false)}
+          onDrop={handleDrop}
+        >
+          <input
+            type="file"
+            id="file-upload"
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            onChange={handleChange}
+            accept=".txt,.json,.md,.markdown"
+            multiple
+          />
+          <div className="text-center">
+            <Upload className={`mx-auto h-12 w-12 ${isDragging ? 'text-blue-500' : 'text-gray-400'}`} />
+            <p className="mt-2 text-sm text-gray-600">
+              Drag and drop your file here, or click to select
+            </p>
+            <p className="mt-1 text-xs text-gray-500">
+              Supports .txt, .json, .md, and .markdown files
+            </p>
+          </div>
+        </div>
+
+        <div className="flex-1 p-4 bg-gray-50 rounded-lg">
+          <h3 className="text-sm font-medium text-gray-900 mb-2">File Upload Instructions</h3>
+          <ul className="text-sm text-gray-600 space-y-2">
+            <li>• Upload text files (.txt) or JSON files containing your prompts</li>
+            <li>• Text files will be split by empty lines</li>
+            <li>• JSON files should contain an array of prompt objects</li>
+            <li>• Each prompt should include title and content</li>
+            <li>• Optional: Add tags and categories to organize your prompts</li>
+          </ul>
+        </div>
+      </div>
       {error && (
         <div className="mt-2 text-sm text-red-600">
           {error}

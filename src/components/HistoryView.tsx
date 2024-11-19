@@ -10,10 +10,10 @@ interface HistoryViewProps {
 
 const HistoryView: React.FC<HistoryViewProps> = ({ history, onToggleActive }) => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Prompt Upload History</h1>
       <div className="bg-white shadow-sm rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
-        <h2 className="text-2xl font-bold mb-4">Prompt Upload History</h2>
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>

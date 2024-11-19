@@ -1,15 +1,16 @@
 import React from 'react';
-import { Home, Database, History, BarChart2 } from 'lucide-react';
+import { Home, Database, History, BarChart2, Book } from 'lucide-react';
 
 interface SidebarProps {
-  onNavigate: (view: 'dashboard' | 'prompts' | 'history' | 'analytics') => void;
+  onNavigate: (view: 'dashboard' | 'prompts' | 'history' | 'analytics' | 'glossary') => void;
   currentView: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ onNavigate, currentView }) => {
   const items = [
     { name: 'Dashboard', icon: Home, view: 'dashboard' as const },
-    { name: 'Prompts', icon: Database, view: 'prompts' as const },
+    { name: 'Prompt Glossary', icon: Book, view: 'glossary' as const },
+    { name: 'Prompt Manager', icon: Database, view: 'prompts' as const },
     { name: 'History', icon: History, view: 'history' as const },
     { name: 'Analytics', icon: BarChart2, view: 'analytics' as const },
   ];

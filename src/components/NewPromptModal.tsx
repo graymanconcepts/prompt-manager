@@ -61,7 +61,7 @@ const NewPromptModal: React.FC<NewPromptModalProps> = ({ isOpen, onClose, onSave
                   id="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none sm:text-sm"
                   required
                 />
               </div>
@@ -75,7 +75,7 @@ const NewPromptModal: React.FC<NewPromptModalProps> = ({ isOpen, onClose, onSave
                   rows={6}
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none sm:text-sm"
                   required
                 />
               </div>
@@ -90,7 +90,7 @@ const NewPromptModal: React.FC<NewPromptModalProps> = ({ isOpen, onClose, onSave
                   value={tags}
                   onChange={(e) => setTags(e.target.value)}
                   placeholder="art, landscape, fantasy"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none sm:text-sm"
                 />
               </div>
             </div>

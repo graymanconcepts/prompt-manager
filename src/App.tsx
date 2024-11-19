@@ -1,18 +1,20 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Plus} from 'lucide-react';
+import { Plus } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import PromptsView from './components/PromptsView';
 import HistoryView from './components/HistoryView';
 import AnalyticsView from './components/AnalyticsView';
+import PromptGlossaryView from './components/PromptGlossaryView';
 import NewPromptModal from './components/NewPromptModal';
+import Tooltip from './components/Tooltip';
 import { api } from './api/client';
 import { Prompt, UploadHistory } from './types';
 
 function App() {
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [history, setHistory] = useState<UploadHistory[]>([]);
-  const [currentView, setCurrentView] = useState<'dashboard' | 'prompts' | 'history' | 'analytics'>('dashboard');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'prompts' | 'history' | 'analytics' | 'glossary'>('dashboard');
   const [isNewPromptModalOpen, setIsNewPromptModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -166,16 +168,18 @@ function App() {
       <Sidebar onNavigate={setCurrentView} currentView={currentView} />
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="bg-gray-800 shadow-sm z-10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-full mx-auto px-8 sm:px-12 lg:px-16">
             <div className="flex justify-between items-center py-4">
               <div className="flex-1 flex justify-end">
-                <button
-                  onClick={() => setIsNewPromptModalOpen(true)}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors duration-200"
-                >
-                  <Plus className="h-5 w-5 mr-2" />
-                  New Prompt
-                </button>
+                <Tooltip text="Create a new prompt template" position="bottom">
+                  <button
+                    onClick={() => setIsNewPromptModalOpen(true)}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors duration-200"
+                  >
+                    <Plus className="h-5 w-5 mr-2" />
+                    New Prompt
+                  </button>
+                </Tooltip>
               </div>
             </div>
           </div>
@@ -202,6 +206,9 @@ function App() {
           )}
           {currentView === 'analytics' && (
             <AnalyticsView prompts={prompts} />
+          )}
+          {currentView === 'glossary' && (
+            <PromptGlossaryView />
           )}
         </main>
 
