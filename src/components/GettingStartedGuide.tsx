@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronRight, Plus, Tags, BookOpen, ToggleLeft } from 'lucide-react';
+import { ChevronDown, ChevronRight, Plus, Tags, BookOpen, Wand2, Upload } from 'lucide-react';
 
 interface GettingStartedGuideProps {
   onDismiss: () => void;
@@ -27,7 +27,7 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
           ) : (
             <ChevronRight className="h-5 w-5 text-gray-500 mr-2" />
           )}
-          <h2 className="text-lg font-medium">Getting Started with the Prompt Manager</h2>
+          <h2 className="text-lg font-medium">Getting Started with the Prompt Library</h2>
         </div>
       </button>
 
@@ -37,11 +37,23 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
             <div className="space-y-4">
               <div>
                 <div className="flex items-center text-gray-900 mb-2">
-                  <Plus className="h-5 w-5 mr-2" />
-                  <h3 className="font-medium">Creating Your First Prompt</h3>
+                  <Wand2 className="h-5 w-5 mr-2" />
+                  <h3 className="font-medium">Smart Image Prompt Creation</h3>
                 </div>
                 <p className="text-sm text-gray-600 ml-7">
-                  Click the "New Prompt" button in the top right to create a prompt.
+                  Use our intelligent editor to create image prompts with real-time suggestions
+                  and smart assistance. Click the "Image Prompt" button to get started with
+                  context-aware recommendations from our curated glossary.
+                </p>
+              </div>
+
+              <div>
+                <div className="flex items-center text-gray-900 mb-2">
+                  <Plus className="h-5 w-5 mr-2" />
+                  <h3 className="font-medium">Creating Other Prompts</h3>
+                </div>
+                <p className="text-sm text-gray-600 ml-7">
+                  Click the "New Prompt" button to create general prompts.
                   Give it a clear title and detailed content. Consider adding a
                   category to keep your prompts organized.
                 </p>
@@ -49,40 +61,40 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
 
               <div>
                 <div className="flex items-center text-gray-900 mb-2">
-                  <Tags className="h-5 w-5 mr-2" />
-                  <h3 className="font-medium">Best Practices for Tagging</h3>
+                  <Upload className="h-5 w-5 mr-2" />
+                  <h3 className="font-medium">Import Existing Prompts</h3>
                 </div>
-                <ul className="text-sm text-gray-600 ml-7 list-disc pl-4">
-                  <li>Use descriptive, relevant tags</li>
-                  <li>Add multiple tags to improve searchability</li>
-                  <li>Keep tags consistent across similar prompts</li>
-                  <li>Use categories for broad grouping</li>
-                </ul>
+                <p className="text-sm text-gray-600 ml-7">
+                  Already have text-based prompts? Upload your existing prompts
+                  to quickly build your library. We'll help you organize and
+                  tag them automatically.
+                </p>
               </div>
             </div>
 
             <div className="space-y-4">
               <div>
                 <div className="flex items-center text-gray-900 mb-2">
-                  <BookOpen className="h-5 w-5 mr-2" />
-                  <h3 className="font-medium">Using the Glossary</h3>
+                  <Tags className="h-5 w-5 mr-2" />
+                  <h3 className="font-medium">Organization Tips</h3>
                 </div>
-                <p className="text-sm text-gray-600 ml-7">
-                  The Prompt Glossary is your knowledge base. Search through all prompts,
-                  filter by category, and find inspiration for new prompts. Use it to
-                  maintain consistency in your prompt library.
-                </p>
+                <ul className="text-sm text-gray-600 ml-7 list-disc pl-4">
+                  <li>Use descriptive, relevant tags</li>
+                  <li>Add multiple tags to improve searchability</li>
+                  <li>Take advantage of smart suggestions</li>
+                  <li>Review and refine your prompts regularly</li>
+                </ul>
               </div>
 
               <div>
                 <div className="flex items-center text-gray-900 mb-2">
-                  <ToggleLeft className="h-5 w-5 mr-2" />
-                  <h3 className="font-medium">Managing Active/Inactive Prompts</h3>
+                  <BookOpen className="h-5 w-5 mr-2" />
+                  <h3 className="font-medium">Using the Glossary</h3>
                 </div>
                 <p className="text-sm text-gray-600 ml-7">
-                  Keep your workspace clean by managing prompt visibility. Archive
-                  less-used prompts by marking them inactive. They'll still be
-                  searchable in the glossary but won't clutter your dashboard.
+                  The Prompt Glossary powers our smart suggestions and serves as your knowledge base. 
+                  Browse through terms and categories to find inspiration or maintain consistency 
+                  in your prompts.
                 </p>
               </div>
             </div>

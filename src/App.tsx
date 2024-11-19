@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Plus } from 'lucide-react';
+import { Plus, Image } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import PromptsView from './components/PromptsView';
@@ -7,6 +7,7 @@ import HistoryView from './components/HistoryView';
 import AnalyticsView from './components/AnalyticsView';
 import PromptGlossaryView from './components/PromptGlossaryView';
 import NewPromptModal from './components/NewPromptModal';
+import IntelligentPromptEditor from './components/IntelligentPromptEditor';
 import Tooltip from './components/Tooltip';
 import { api } from './api/client';
 import { Prompt, UploadHistory } from './types';
@@ -16,6 +17,7 @@ function App() {
   const [history, setHistory] = useState<UploadHistory[]>([]);
   const [currentView, setCurrentView] = useState<'dashboard' | 'prompts' | 'history' | 'analytics' | 'glossary'>('dashboard');
   const [isNewPromptModalOpen, setIsNewPromptModalOpen] = useState(false);
+  const [isPromptEditorOpen, setIsPromptEditorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -83,7 +85,7 @@ function App() {
     handleAddPromptsInternal(newPrompts, historyEntry);
   };
 
-  const handleAddSinglePrompt = async (newPrompt: Prompt) => {
+  const handleAddPrompt = async (newPrompt: Prompt) => {
     try {
       const promptWithActive = {
         ...newPrompt,
@@ -166,18 +168,28 @@ function App() {
   return (
     <div className="flex h-screen bg-slate-100">
       <Sidebar onNavigate={setCurrentView} currentView={currentView} />
+      
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="bg-gray-800 shadow-sm z-10">
           <div className="max-w-full mx-auto px-8 sm:px-12 lg:px-16">
             <div className="flex justify-between items-center py-4">
-              <div className="flex-1 flex justify-end">
-                <Tooltip text="Create a new prompt template" position="bottom">
+              <div className="flex-1 flex justify-end space-x-4">
+                <Tooltip text="Create new prompt" position="bottom">
                   <button
                     onClick={() => setIsNewPromptModalOpen(true)}
                     className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors duration-200"
                   >
                     <Plus className="h-5 w-5 mr-2" />
                     New Prompt
+                  </button>
+                </Tooltip>
+                <Tooltip text="Create image generation prompt" position="bottom">
+                  <button
+                    onClick={() => setIsPromptEditorOpen(true)}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors duration-200"
+                  >
+                    <Image className="h-5 w-5 mr-2" />
+                    Image Prompt
                   </button>
                 </Tooltip>
               </div>
@@ -215,8 +227,31 @@ function App() {
         <NewPromptModal
           isOpen={isNewPromptModalOpen}
           onClose={() => setIsNewPromptModalOpen(false)}
-          onSave={handleAddSinglePrompt}
+          onSave={handleAddPrompt}
         />
+
+        {isPromptEditorOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="w-full max-h-[90vh] overflow-auto">
+              <IntelligentPromptEditor
+                onComplete={(prompt, title, tags) => {
+                  handleAddPrompt({
+                    id: crypto.randomUUID(),
+                    title: title,
+                    description: 'Created with Intelligent Prompt Editor',
+                    content: prompt,
+                    tags: ['image-generation', ...tags],
+                    created: new Date().toISOString(),
+                    lastModified: new Date().toISOString(),
+                    isActive: true
+                  });
+                  setIsPromptEditorOpen(false);
+                }}
+                onCancel={() => setIsPromptEditorOpen(false)}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
