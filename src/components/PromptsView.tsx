@@ -57,17 +57,17 @@ const PromptsView: React.FC<PromptsViewProps> = ({
 
   return (
     <div className="p-6">
-      {error && <div className="text-red-600 mb-4">{error}</div>}
+      {error && <div className="text-red-400 mb-4">{error}</div>}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-4">Manage Your Prompts</h1>
+        <h1 className="text-2xl font-bold mb-4 text-blue-400">Manage Your Prompts</h1>
         <FileUpload onFileProcess={onAddPrompts} />
       </div>
 
-      <div className="overflow-x-auto bg-white rounded-lg shadow">
-        <h2 className="text-2xl font-bold mb-4">All Prompts Listing</h2>
+      <div className="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold mb-4 p-6 text-gray-200">All Prompts Listing</h2>
         <table className="min-w-full table-auto">
           <thead>
-            <tr className="bg-gray-50 text-gray-600 text-sm leading-normal">
+            <tr className="bg-gray-900 text-gray-300 text-sm leading-normal">
               <th className="py-3 px-6 text-left">Date</th>
               <th className="py-3 px-6 text-left">Title</th>
               <th className="py-3 px-6 text-left">Content Preview</th>
@@ -75,13 +75,13 @@ const PromptsView: React.FC<PromptsViewProps> = ({
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
-          <tbody className="text-gray-600 text-sm">
+          <tbody className="text-gray-300 text-sm">
             {prompts.map((prompt) => (
-              <tr key={prompt.id} className="border-b border-gray-200 hover:bg-gray-50">
+              <tr key={prompt.id} className="border-b border-gray-700 hover:bg-gray-700 transition-colors duration-150">
                 <td className="py-4 px-6">
                   {format(new Date(prompt.created), 'MMM d, yyyy HH:mm')}
                 </td>
-                <td className="py-4 px-6 font-medium">
+                <td className="py-4 px-6 font-medium text-white">
                   {prompt.title}
                 </td>
                 <td className="py-4 px-6">
@@ -89,7 +89,7 @@ const PromptsView: React.FC<PromptsViewProps> = ({
                 </td>
                 <td className="py-4 px-6">
                   <span className={`inline-block px-2 py-1 rounded text-xs ${
-                    prompt.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                    prompt.isActive ? 'bg-blue-900 text-blue-200' : 'bg-gray-700 text-gray-300'
                   }`}>
                     {prompt.isActive ? 'Active' : 'Inactive'}
                   </span>
@@ -98,7 +98,7 @@ const PromptsView: React.FC<PromptsViewProps> = ({
                   <div className="flex justify-center space-x-3">
                     <button
                       onClick={() => handleEdit(prompt)}
-                      className="text-blue-600 hover:text-blue-800"
+                      className="text-blue-400 hover:text-blue-300 transition-colors duration-150"
                       title="Edit prompt"
                     >
                       <Pencil className="h-5 w-5" />
@@ -106,8 +106,8 @@ const PromptsView: React.FC<PromptsViewProps> = ({
                     <button
                       onClick={() => handleToggleActive(prompt.id)}
                       className={`${
-                        prompt.isActive ? 'text-gray-600' : 'text-gray-400'
-                      } hover:text-gray-800`}
+                        prompt.isActive ? 'text-gray-300' : 'text-gray-500'
+                      } hover:text-gray-200 transition-colors duration-150`}
                       title={prompt.isActive ? 'Deactivate prompt' : 'Activate prompt'}
                     >
                       {prompt.isActive ? (
@@ -118,7 +118,7 @@ const PromptsView: React.FC<PromptsViewProps> = ({
                     </button>
                     <button
                       onClick={() => handleDeleteClick(prompt.id)}
-                      className="text-red-600 hover:text-red-800"
+                      className="text-red-400 hover:text-red-300 transition-colors duration-150"
                       title="Delete prompt"
                     >
                       <Trash2 className="h-5 w-5" />

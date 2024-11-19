@@ -11,53 +11,53 @@ interface HistoryViewProps {
 const HistoryView: React.FC<HistoryViewProps> = ({ history, onToggleActive }) => {
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Prompt Upload History</h1>
-      <div className="bg-white shadow-sm rounded-lg overflow-hidden">
+      <h1 className="text-2xl font-bold mb-4 text-blue-400">Prompt Upload History</h1>
+      <div className="bg-gray-800 shadow-lg rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+          <table className="min-w-full divide-y divide-gray-700">
+            <thead className="bg-gray-900">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                   File Name
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                   Upload Date
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                   Status
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                   Prompts
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                   Active
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-gray-800 divide-y divide-gray-700">
               {history.map((item) => (
-                <tr key={item.id} className={`hover:bg-gray-50 ${!item.isActive ? 'opacity-75' : ''}`}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <tr key={item.id} className={`hover:bg-gray-700 transition-colors duration-150 ${!item.isActive ? 'opacity-75' : ''}`}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                     {item.fileName}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {format(new Date(item.uploadDate), 'MMM d, yyyy HH:mm')}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       {item.status === 'success' ? (
-                        <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
+                        <CheckCircle className="h-5 w-5 text-green-400 mr-2" />
                       ) : (
-                        <XCircle className="h-5 w-5 text-red-500 mr-2" />
+                        <XCircle className="h-5 w-5 text-red-400 mr-2" />
                       )}
                       <span className={`text-sm ${
-                        item.status === 'success' ? 'text-green-900' : 'text-red-900'
+                        item.status === 'success' ? 'text-green-400' : 'text-red-400'
                       }`}>
                         {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
                       </span>
                       {item.errorMessage && (
                         <div className="ml-2 group relative">
-                          <AlertCircle className="h-5 w-5 text-amber-500 cursor-help" />
+                          <AlertCircle className="h-5 w-5 text-amber-400 cursor-help" />
                           <div className="hidden group-hover:block absolute z-10 w-48 p-2 text-sm bg-gray-900 text-white rounded shadow-lg -top-2 left-6">
                             {item.errorMessage}
                           </div>
@@ -65,17 +65,17 @@ const HistoryView: React.FC<HistoryViewProps> = ({ history, onToggleActive }) =>
                       )}
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {item.promptCount} prompts
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     <button
                       onClick={() => onToggleActive(item.id)}
-                      className="text-gray-400 hover:text-gray-500 transition-colors duration-200"
+                      className="text-gray-400 hover:text-blue-400 transition-colors duration-200"
                       title={item.isActive ? 'Deactivate prompts' : 'Activate prompts'}
                     >
                       {item.isActive ? (
-                        <ToggleRight className="h-6 w-6 text-green-500" />
+                        <ToggleRight className="h-6 w-6 text-blue-400" />
                       ) : (
                         <ToggleLeft className="h-6 w-6" />
                       )}

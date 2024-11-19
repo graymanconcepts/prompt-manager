@@ -14,10 +14,10 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm mb-6 border border-gray-800">
+    <div className="bg-gray-800 rounded-lg shadow-sm mb-6 border border-gray-700">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className={`w-full px-4 py-3 flex items-center justify-between text-left text-gray-900 hover:bg-[#f5f0e8] ${
+        className={`w-full px-4 py-3 flex items-center justify-between text-left text-gray-100 hover:bg-gray-700 ${
           isExpanded ? 'rounded-t-lg' : 'rounded-lg'
         }`}
       >
@@ -32,15 +32,15 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
       </button>
 
       {isExpanded && (
-        <div className="px-4 pb-4 bg-[#f5f0e8] rounded-b-lg">
+        <div className="px-4 pb-4 bg-gray-800 rounded-b-lg">
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
-                <div className="flex items-center text-gray-900 mb-2">
+                <div className="flex items-center text-gray-100 mb-2">
                   <Wand2 className="h-5 w-5 mr-2" />
                   <h3 className="font-medium">Smart Image Prompt Creation</h3>
                 </div>
-                <p className="text-sm text-gray-600 ml-7">
+                <p className="text-sm text-gray-300 ml-7">
                   Use our intelligent editor to create image prompts with real-time suggestions
                   and smart assistance. Click the "Image Prompt" button to get started with
                   context-aware recommendations from our curated glossary.
@@ -48,11 +48,11 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
               </div>
 
               <div>
-                <div className="flex items-center text-gray-900 mb-2">
+                <div className="flex items-center text-gray-100 mb-2">
                   <Plus className="h-5 w-5 mr-2" />
                   <h3 className="font-medium">Creating Other Prompts</h3>
                 </div>
-                <p className="text-sm text-gray-600 ml-7">
+                <p className="text-sm text-gray-300 ml-7">
                   Click the "New Prompt" button to create general prompts.
                   Give it a clear title and detailed content. Consider adding a
                   category to keep your prompts organized.
@@ -60,11 +60,11 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
               </div>
 
               <div>
-                <div className="flex items-center text-gray-900 mb-2">
+                <div className="flex items-center text-gray-100 mb-2">
                   <Upload className="h-5 w-5 mr-2" />
                   <h3 className="font-medium">Import Existing Prompts</h3>
                 </div>
-                <p className="text-sm text-gray-600 ml-7">
+                <p className="text-sm text-gray-300 ml-7">
                   Already have text-based prompts? Upload your existing prompts
                   to quickly build your library. We'll help you organize and
                   tag them automatically.
@@ -74,11 +74,11 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
 
             <div className="space-y-4">
               <div>
-                <div className="flex items-center text-gray-900 mb-2">
+                <div className="flex items-center text-gray-100 mb-2">
                   <Tags className="h-5 w-5 mr-2" />
                   <h3 className="font-medium">Organization Tips</h3>
                 </div>
-                <ul className="text-sm text-gray-600 ml-7 list-disc pl-4">
+                <ul className="text-sm text-gray-300 ml-7 list-disc pl-4">
                   <li>Use descriptive, relevant tags</li>
                   <li>Add multiple tags to improve searchability</li>
                   <li>Take advantage of smart suggestions</li>
@@ -87,11 +87,11 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
               </div>
 
               <div>
-                <div className="flex items-center text-gray-900 mb-2">
+                <div className="flex items-center text-gray-100 mb-2">
                   <BookOpen className="h-5 w-5 mr-2" />
                   <h3 className="font-medium">Using the Glossary</h3>
                 </div>
-                <p className="text-sm text-gray-600 ml-7">
+                <p className="text-sm text-gray-300 ml-7">
                   The Prompt Glossary powers our smart suggestions and serves as your knowledge base. 
                   Browse through terms and categories to find inspiration or maintain consistency 
                   in your prompts.
@@ -100,10 +100,10 @@ const GettingStartedGuide: React.FC<GettingStartedGuideProps> = ({ onDismiss, is
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-gray-200 flex justify-end">
+          <div className="mt-4 pt-3 border-t border-gray-700 flex justify-end">
             <button
               onClick={onDismiss}
-              className="text-sm text-gray-500 hover:text-gray-700"
+              className="text-sm text-gray-300 hover:text-gray-100"
             >
               Don't show this again
             </button>
