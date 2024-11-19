@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Plus, Image } from 'lucide-react';
+import { Plus, Image, Pencil } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import PromptsView from './components/PromptsView';
@@ -188,7 +188,7 @@ function App() {
                     onClick={() => setIsNewPromptModalOpen(true)}
                     className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors duration-200"
                   >
-                    <Plus className="h-5 w-5 mr-2" />
+                    <Pencil className="h-5 w-5 mr-2" />
                     Text Prompt
                   </button>
                 </Tooltip>

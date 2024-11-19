@@ -12,8 +12,17 @@ const NewPromptModal: React.FC<NewPromptModalProps> = ({ isOpen, onClose, onSave
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tags, setTags] = useState('');
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-  if (!isOpen) return null;
+  const hasUnsavedChanges = title.trim() !== '' || content.trim() !== '' || tags.trim() !== '';
+
+  const handleClose = () => {
+    if (hasUnsavedChanges) {
+      setShowConfirmDialog(true);
+    } else {
+      onClose();
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,16 +43,18 @@ const NewPromptModal: React.FC<NewPromptModalProps> = ({ isOpen, onClose, onSave
     onClose();
   };
 
+  if (!isOpen) return null;
+
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex min-h-screen items-center justify-center p-4">
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onClick={onClose} />
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onClick={handleClose} />
         
         <div className="relative w-full max-w-2xl bg-gray-800 rounded-lg shadow-xl">
           <div className="flex items-center justify-between p-4 border-b border-gray-700">
             <h3 className="text-xl font-semibold text-blue-400">Create New Prompt</h3>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="text-gray-400 hover:text-gray-300"
             >
               <X className="h-6 w-6" />
@@ -98,7 +109,7 @@ const NewPromptModal: React.FC<NewPromptModalProps> = ({ isOpen, onClose, onSave
             <div className="mt-6 flex justify-end space-x-4">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleClose}
                 className="px-4 py-2 text-gray-300 hover:text-white"
               >
                 Cancel
@@ -114,6 +125,38 @@ const NewPromptModal: React.FC<NewPromptModalProps> = ({ isOpen, onClose, onSave
           </form>
         </div>
       </div>
+
+      {/* Confirmation Dialog */}
+      {showConfirmDialog && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 border border-gray-700">
+            <h3 className="text-xl font-semibold text-gray-100 mb-4">Discard changes?</h3>
+            <p className="text-gray-300 mb-6">
+              You have unsaved changes. Are you sure you want to close the editor? Your changes will be lost.
+            </p>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={() => setShowConfirmDialog(false)}
+                className="px-4 py-2 text-gray-300 hover:text-white transition-colors duration-150"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  setShowConfirmDialog(false);
+                  setTitle('');
+                  setContent('');
+                  setTags('');
+                  onClose();
+                }}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-150"
+              >
+                Discard
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
