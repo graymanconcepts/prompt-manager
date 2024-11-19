@@ -4,9 +4,9 @@ import { Prompt } from '../types';
 import { TagList } from './Tag';
 import GettingStartedGuide from './GettingStartedGuide';
 
-interface DashboardProps {
+interface DashboardViewProps {
   prompts: Prompt[];
-  onEditPrompt: (updatedPrompt: Prompt) => Promise<void>;
+  onEditPrompt: (prompt: Prompt) => void;
 }
 
 const PromptCard = ({ prompt, onClick }: { prompt: Prompt; onClick: () => void }) => (
@@ -39,7 +39,7 @@ const PromptCard = ({ prompt, onClick }: { prompt: Prompt; onClick: () => void }
   </div>
 );
 
-const Dashboard: React.FC<DashboardProps> = ({ prompts, onEditPrompt }) => {
+const DashboardView: React.FC<DashboardViewProps> = ({ prompts, onEditPrompt }) => {
   const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>(null);
   const [copied, setCopied] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -213,4 +213,4 @@ const Dashboard: React.FC<DashboardProps> = ({ prompts, onEditPrompt }) => {
   );
 };
 
-export default Dashboard;
+export default DashboardView;

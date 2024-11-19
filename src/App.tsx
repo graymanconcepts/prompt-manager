@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Plus, Image, Pencil } from 'lucide-react';
 import Sidebar from './components/Sidebar';
-import Dashboard from './components/Dashboard';
+import DashboardView from './components/DashboardView';
 import PromptsView from './components/PromptsView';
 import HistoryView from './components/HistoryView';
 import AnalyticsView from './components/AnalyticsView';
@@ -199,7 +199,7 @@ function App() {
 
         <main className="flex-1 overflow-y-auto bg-slate-100/90">
           {currentView === 'dashboard' && (
-            <Dashboard 
+            <DashboardView 
               prompts={activePrompts}
               onEditPrompt={handleEditPrompt}
             />
