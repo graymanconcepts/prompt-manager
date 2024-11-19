@@ -174,15 +174,6 @@ function App() {
           <div className="max-w-full mx-auto px-8 sm:px-12 lg:px-16">
             <div className="flex justify-between items-center py-4">
               <div className="flex-1 flex justify-end space-x-4">
-                <Tooltip text="Create new prompt" position="bottom">
-                  <button
-                    onClick={() => setIsNewPromptModalOpen(true)}
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors duration-200"
-                  >
-                    <Plus className="h-5 w-5 mr-2" />
-                    New Prompt
-                  </button>
-                </Tooltip>
                 <Tooltip text="Create image generation prompt" position="bottom">
                   <button
                     onClick={() => setIsPromptEditorOpen(true)}
@@ -190,6 +181,15 @@ function App() {
                   >
                     <Image className="h-5 w-5 mr-2" />
                     Image Prompt
+                  </button>
+                </Tooltip>
+                <Tooltip text="Create text-based prompt" position="bottom">
+                  <button
+                    onClick={() => setIsNewPromptModalOpen(true)}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500 transition-colors duration-200"
+                  >
+                    <Plus className="h-5 w-5 mr-2" />
+                    Text Prompt
                   </button>
                 </Tooltip>
               </div>
