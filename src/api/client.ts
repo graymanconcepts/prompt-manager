@@ -1,96 +1,87 @@
 import type { Prompt, UploadHistory } from '../types';
 
-const API_BASE_URL = 'http://localhost:3001/api';
-
 export const api = {
   async getAllPrompts(): Promise<Prompt[]> {
-    const response = await fetch(`${API_BASE_URL}/prompts`);
-    if (!response.ok) {
+    try {
+      return await window.api.getPrompts();
+    } catch (error) {
+      console.error('Failed to fetch prompts:', error);
       throw new Error('Failed to fetch prompts');
     }
-    return response.json();
   },
 
   async getPromptById(id: string): Promise<Prompt | null> {
-    const response = await fetch(`${API_BASE_URL}/prompts/${id}`);
-    if (response.status === 404) {
-      return null;
-    }
-    if (!response.ok) {
+    try {
+      return await window.api.getPrompt(id);
+    } catch (error) {
+      if (error instanceof Error && error.message === 'Prompt not found') {
+        return null;
+      }
+      console.error('Failed to fetch prompt:', error);
       throw new Error('Failed to fetch prompt');
     }
-    return response.json();
   },
 
   async createPrompt(prompt: Prompt): Promise<Prompt[]> {
-    const response = await fetch(`${API_BASE_URL}/prompts`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(prompt),
-    });
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(`Failed to create prompt: ${error.details || error.error}`);
+    try {
+      return await window.api.createPrompt(prompt);
+    } catch (error) {
+      console.error('Failed to create prompt:', error);
+      throw new Error(`Failed to create prompt: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
-    return response.json();
   },
 
   async updatePrompt(prompt: Prompt): Promise<Prompt[]> {
-    const response = await fetch(`${API_BASE_URL}/prompts/${prompt.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(prompt),
-    });
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(`Failed to update prompt: ${error.details || error.error}`);
+    try {
+      return await window.api.updatePrompt(prompt.id, prompt);
+    } catch (error) {
+      console.error('Failed to update prompt:', error);
+      throw new Error(`Failed to update prompt: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
-    return response.json();
   },
 
   async deletePrompt(id: string): Promise<Prompt[]> {
-    const response = await fetch(`${API_BASE_URL}/prompts/${id}`, {
-      method: 'DELETE',
-    });
-    if (!response.ok) {
+    try {
+      return await window.api.deletePrompt(id);
+    } catch (error) {
+      console.error('Failed to delete prompt:', error);
       throw new Error('Failed to delete prompt');
     }
-    return response.json();
+  },
+
+  async searchPrompts(searchTerm: string): Promise<Prompt[]> {
+    try {
+      return await window.api.searchPrompts(searchTerm);
+    } catch (error) {
+      console.error('Failed to search prompts:', error);
+      throw new Error('Failed to search prompts');
+    }
   },
 
   async getAllHistory(): Promise<UploadHistory[]> {
-    const response = await fetch(`${API_BASE_URL}/history`);
-    if (!response.ok) {
+    try {
+      return await window.api.getHistory();
+    } catch (error) {
+      console.error('Failed to fetch history:', error);
       throw new Error('Failed to fetch history');
     }
-    return response.json();
   },
 
   async createHistory(history: UploadHistory): Promise<UploadHistory[]> {
-    const response = await fetch(`${API_BASE_URL}/history`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(history),
-    });
-    if (!response.ok) {
+    try {
+      return await window.api.createHistory(history);
+    } catch (error) {
+      console.error('Failed to create history entry:', error);
       throw new Error('Failed to create history entry');
     }
-    return response.json();
   },
 
   async toggleHistoryActive(id: string): Promise<UploadHistory[]> {
-    const response = await fetch(`${API_BASE_URL}/history/${id}/toggle`, {
-      method: 'PUT',
-    });
-    if (!response.ok) {
+    try {
+      return await window.api.toggleHistoryActive(id);
+    } catch (error) {
+      console.error('Failed to toggle history active state:', error);
       throw new Error('Failed to toggle history active state');
     }
-    return response.json();
   },
 };
