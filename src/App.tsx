@@ -238,7 +238,7 @@ function App() {
                   handleAddPrompt({
                     id: crypto.randomUUID(),
                     title: title,
-                    description: 'Created with Intelligent Prompt Editor',
+                    description: prompt,
                     content: prompt,
                     tags: ['image-generation', ...tags],
                     created: new Date().toISOString(),
