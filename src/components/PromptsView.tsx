@@ -69,6 +69,22 @@ const PromptsView: React.FC<PromptsViewProps> = ({
 
       <div className="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-4 p-6 text-gray-200">All Prompts Listing</h2>
+        
+        <div className="px-6 pb-4 flex gap-6 text-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-green-900"></div>
+            <span className="text-green-200">Active</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-amber-900/70"></div>
+            <span className="text-amber-200">File Disabled</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-gray-700"></div>
+            <span className="text-gray-300">Inactive</span>
+          </div>
+        </div>
+
         <table className="min-w-full table-auto">
           <thead>
             <tr className="bg-gray-900 text-gray-300 text-sm leading-normal">
