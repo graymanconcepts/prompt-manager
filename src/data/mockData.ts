@@ -10,7 +10,10 @@ export const mockPrompts: Prompt[] = [
     created: '2023-01-01T12:00:00Z',
     lastModified: '2023-01-01T12:00:00Z',
     isActive: true,
-    historyId: '1'  // Links to writing_prompts.txt
+    historyId: '1',  // Links to writing_prompts.txt
+    rating: 0,
+    ratingCount: 0,
+    isFavorite: false
   },
   {
     id: '2',
@@ -21,7 +24,10 @@ export const mockPrompts: Prompt[] = [
     created: '2023-01-02T12:00:00Z',
     lastModified: '2023-01-02T12:00:00Z',
     isActive: true,
-    historyId: '2'  // Links to coding_prompts.txt
+    historyId: '2',  // Links to coding_prompts.txt
+    rating: 0,
+    ratingCount: 0,
+    isFavorite: false
   },
   {
     id: '3',
@@ -32,7 +38,10 @@ export const mockPrompts: Prompt[] = [
     created: '2023-01-03T12:00:00Z',
     lastModified: '2023-01-03T12:00:00Z',
     isActive: false,
-    historyId: '3'  // Links to study_prompts.txt
+    historyId: '3',  // Links to study_prompts.txt
+    rating: 0,
+    ratingCount: 0,
+    isFavorite: false
   }
 ];
 

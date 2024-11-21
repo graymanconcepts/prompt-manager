@@ -65,6 +65,50 @@ class Database {
     });
   }
 
+  private async checkColumnExists(table: string, column: string): Promise<boolean> {
+    try {
+      const result = await this.get<{ name: string }>(`PRAGMA table_info(${table})`);
+      return !!result;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  private async migrateDatabase(): Promise<void> {
+    try {
+      // Start a transaction for the migration
+      await this.run('BEGIN TRANSACTION');
+
+      // Add rating column if it doesn't exist
+      const hasRating = await this.checkColumnExists('prompts', 'rating');
+      if (!hasRating) {
+        await this.run('ALTER TABLE prompts ADD COLUMN rating INTEGER CHECK (rating >= 0 AND rating <= 5)');
+        await this.run('UPDATE prompts SET rating = 0');
+      }
+
+      // Add ratingCount column if it doesn't exist
+      const hasRatingCount = await this.checkColumnExists('prompts', 'ratingCount');
+      if (!hasRatingCount) {
+        await this.run('ALTER TABLE prompts ADD COLUMN ratingCount INTEGER NOT NULL DEFAULT 0');
+      }
+
+      // Add isFavorite column if it doesn't exist
+      const hasIsFavorite = await this.checkColumnExists('prompts', 'isFavorite');
+      if (!hasIsFavorite) {
+        await this.run('ALTER TABLE prompts ADD COLUMN isFavorite INTEGER NOT NULL DEFAULT 0');
+      }
+
+      // Commit the transaction
+      await this.run('COMMIT');
+      console.log('Database migration completed successfully');
+    } catch (error) {
+      // Rollback the transaction if there's an error
+      await this.run('ROLLBACK');
+      console.error('Error during database migration:', error);
+      throw error;
+    }
+  }
+
   async init(): Promise<void> {
     if (this.initialized) {
       console.log('Database already initialized, skipping initialization');
@@ -97,9 +141,15 @@ class Database {
           lastModified TEXT NOT NULL,
           isActive INTEGER NOT NULL DEFAULT 1,
           historyId TEXT,
+          rating INTEGER CHECK (rating >= 0 AND rating <= 5),
+          ratingCount INTEGER NOT NULL DEFAULT 0,
+          isFavorite INTEGER NOT NULL DEFAULT 0,
           FOREIGN KEY (historyId) REFERENCES upload_history(id)
         )
       `);
+
+      // Run migrations for existing databases
+      await this.migrateDatabase();
 
       // Check if we need to seed data
       const promptCount = await this.get<{ count: number }>('SELECT COUNT(*) as count FROM prompts');
@@ -125,12 +175,39 @@ class Database {
 
       // Seed prompts
       for (const prompt of mockPrompts) {
-        await this.createPrompt(prompt);
+        await this.run(
+          'INSERT INTO prompts (id, title, description, content, tags, created, lastModified, isActive, historyId, rating, ratingCount, isFavorite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [
+            prompt.id,
+            prompt.title,
+            prompt.description,
+            prompt.content,
+            Array.isArray(prompt.tags) ? prompt.tags.join(',') : '',
+            prompt.created,
+            prompt.lastModified,
+            prompt.isActive ? 1 : 0,
+            prompt.historyId,
+            prompt.rating || 0,
+            prompt.ratingCount || 0,
+            prompt.isFavorite ? 1 : 0
+          ]
+        );
       }
 
       // Seed history
       for (const history of mockHistory) {
-        await this.createHistory(history);
+        await this.run(
+          'INSERT INTO upload_history (id, fileName, uploadDate, status, isActive, promptCount, errorMessage) VALUES (?, ?, ?, ?, ?, ?, ?)',
+          [
+            history.id,
+            history.fileName,
+            history.uploadDate,
+            history.status,
+            history.isActive ? 1 : 0,
+            history.promptCount,
+            history.errorMessage
+          ]
+        );
       }
 
       // Commit transaction
@@ -145,7 +222,7 @@ class Database {
   }
 
   async getAllPrompts(): Promise<Prompt[]> {
-    type DBPrompt = Omit<Prompt, 'tags'> & { tags: string; historyIsActive?: number };
+    type DBPrompt = Omit<Prompt, 'tags'> & { tags: string; historyIsActive?: number; rating: number; isFavorite: number; ratingCount: number };
     const prompts = await this.all<DBPrompt>(`
       SELECT 
         p.*,
@@ -158,40 +235,78 @@ class Database {
       ...prompt,
       tags: prompt.tags ? prompt.tags.split(',').map(tag => tag.trim()).filter(Boolean) : [],
       isActive: Boolean(prompt.isActive),
-      historyIsActive: prompt.historyId ? Boolean(prompt.historyIsActive) : true
+      historyIsActive: prompt.historyId ? Boolean(prompt.historyIsActive) : true,
+      rating: prompt.rating,
+      isFavorite: Boolean(prompt.isFavorite),
+      ratingCount: prompt.ratingCount
     }));
   }
 
   async getPromptById(id: string): Promise<Prompt | null> {
-    type DBPrompt = Omit<Prompt, 'tags'> & { tags: string };
+    type DBPrompt = Omit<Prompt, 'tags'> & { tags: string; rating: number; isFavorite: number; ratingCount: number };
     const prompt = await this.get<DBPrompt>('SELECT * FROM prompts WHERE id = ?', [id]);
     if (!prompt) return null;
     return {
       ...prompt,
       tags: prompt.tags ? prompt.tags.split(',').map(tag => tag.trim()).filter(Boolean) : [],
-      isActive: Boolean(prompt.isActive)
+      isActive: Boolean(prompt.isActive),
+      rating: prompt.rating,
+      isFavorite: Boolean(prompt.isFavorite),
+      ratingCount: prompt.ratingCount
     };
   }
 
-  async createPrompt(prompt: Prompt): Promise<void> {
-    const tags = Array.isArray(prompt.tags) ? prompt.tags.filter(Boolean).join(',') : '';
-    await this.run(
-      'INSERT INTO prompts (id, title, description, content, tags, created, lastModified, isActive, historyId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [prompt.id, prompt.title, prompt.description, prompt.content, tags, prompt.created, prompt.lastModified, prompt.isActive ? 1 : 0, prompt.historyId]
-    );
+  async createPrompt(prompt: Prompt): Promise<Prompt[]> {
+    try {
+      const tags = Array.isArray(prompt.tags) ? prompt.tags.join(',') : '';
+      await this.run(
+        'INSERT INTO prompts (id, title, description, content, tags, created, lastModified, isActive, historyId, rating, ratingCount, isFavorite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          prompt.id,
+          prompt.title,
+          prompt.description,
+          prompt.content,
+          tags,
+          prompt.created,
+          prompt.lastModified,
+          prompt.isActive ? 1 : 0,
+          prompt.historyId,
+          prompt.rating || 0,
+          prompt.ratingCount || 0,
+          prompt.isFavorite ? 1 : 0
+        ]
+      );
+      return this.getAllPrompts();
+    } catch (error) {
+      console.error('Error creating prompt:', error);
+      throw error;
+    }
   }
 
-  async updatePrompt(prompt: Prompt): Promise<void> {
-    const tags = Array.isArray(prompt.tags) ? prompt.tags.filter(Boolean).join(',') : '';
-    const exists = await this.getPromptById(prompt.id);
-    if (!exists) {
-      throw new Error(`Prompt with id ${prompt.id} not found`);
+  async updatePrompt(prompt: Prompt): Promise<Prompt[]> {
+    try {
+      const tags = Array.isArray(prompt.tags) ? prompt.tags.join(',') : '';
+      await this.run(
+        'UPDATE prompts SET title = ?, description = ?, content = ?, tags = ?, lastModified = ?, isActive = ?, historyId = ?, rating = ?, ratingCount = ?, isFavorite = ? WHERE id = ?',
+        [
+          prompt.title,
+          prompt.description,
+          prompt.content,
+          tags,
+          prompt.lastModified,
+          prompt.isActive ? 1 : 0,
+          prompt.historyId,
+          prompt.rating || 0,
+          prompt.ratingCount || 0,
+          prompt.isFavorite ? 1 : 0,
+          prompt.id
+        ]
+      );
+      return this.getAllPrompts();
+    } catch (error) {
+      console.error('Error updating prompt:', error);
+      throw error;
     }
-    
-    await this.run(
-      'UPDATE prompts SET title = ?, description = ?, content = ?, tags = ?, lastModified = ?, isActive = ?, historyId = ? WHERE id = ?',
-      [prompt.title, prompt.description, prompt.content, tags, prompt.lastModified, prompt.isActive ? 1 : 0, prompt.historyId, prompt.id]
-    );
   }
 
   async deletePrompt(id: string): Promise<void> {
