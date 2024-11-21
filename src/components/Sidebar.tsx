@@ -1,8 +1,8 @@
 import React from 'react';
-import { Home, Database, History, BarChart2, Book, Library } from 'lucide-react';
+import { Home, Database, FolderOpen, BarChart2, Book, Library } from 'lucide-react';
 
 interface SidebarProps {
-  onNavigate: (view: 'dashboard' | 'prompts' | 'history' | 'analytics' | 'glossary') => void;
+  onNavigate: (view: 'dashboard' | 'prompts' | 'sources' | 'analytics' | 'glossary') => void;
   currentView: string;
 }
 
@@ -11,7 +11,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, currentView }) => {
     { name: 'Dashboard', icon: Home, view: 'dashboard' as const },
     { name: 'Prompt Glossary', icon: Book, view: 'glossary' as const },
     { name: 'Prompt Management', icon: Database, view: 'prompts' as const },
-    { name: 'History', icon: History, view: 'history' as const },
+    { name: 'Source Manager', icon: FolderOpen, view: 'sources' as const },
     { name: 'Analytics', icon: BarChart2, view: 'analytics' as const },
   ];
 

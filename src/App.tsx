@@ -3,6 +3,7 @@ import { Plus, Image, Pencil } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import DashboardView from './components/DashboardView';
 import PromptsView from './components/PromptsView';
+import SourceManagerView from './components/SourceManagerView';
 import HistoryView from './components/HistoryView';
 import AnalyticsView from './components/AnalyticsView';
 import PromptGlossaryView from './components/PromptGlossaryView';
@@ -11,11 +12,12 @@ import IntelligentPromptEditor from './components/IntelligentPromptEditor';
 import Tooltip from './components/Tooltip';
 import { api } from './api/client';
 import { Prompt, UploadHistory } from './types';
+import { format } from 'date-fns';
 
 function App() {
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [history, setHistory] = useState<UploadHistory[]>([]);
-  const [currentView, setCurrentView] = useState<'dashboard' | 'prompts' | 'history' | 'analytics' | 'glossary'>('dashboard');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'prompts' | 'sources' | 'analytics' | 'glossary'>('dashboard');
   const [isNewPromptModalOpen, setIsNewPromptModalOpen] = useState(false);
   const [isPromptEditorOpen, setIsPromptEditorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,15 +40,20 @@ function App() {
     loadData();
   }, []);
 
+  // For dashboard - only consider individual prompt status
   const activePrompts = useMemo(() => {
-    const activeFiles = new Set(
-      history.filter(h => h.isActive).map(h => h.fileName)
-    );
-    return prompts.filter(prompt => 
-      activeFiles.has(`${prompt.title}.txt`) || 
-      !history.some(h => h.fileName === `${prompt.title}.txt`)
-    );
-  }, [prompts, history]);
+    return prompts.filter(prompt => prompt.isActive);
+  }, [prompts]);
+
+  // For PromptsView - consider both prompt and history status
+  const effectivelyActivePrompts = useMemo(() => {
+    return prompts.filter(prompt => {
+      // A prompt is effectively active if:
+      // 1. It's individually active AND
+      // 2. Either it has no history (manually created) OR its history is active
+      return prompt.isActive && (prompt.historyId ? prompt.historyIsActive : true);
+    });
+  }, [prompts]);
 
   const handleAddPromptsInternal = async (newPrompts: Prompt[], historyEntry: UploadHistory) => {
     try {
@@ -71,17 +78,7 @@ function App() {
     }
   };
 
-  const handleAddPrompts = (newPrompts: Prompt[]) => {
-    const historyEntry: UploadHistory = {
-      id: crypto.randomUUID(),
-      fileName: `batch_upload_${new Date().toISOString()}`,
-      uploadDate: new Date().toISOString(),
-      status: 'success',
-      isActive: true,
-      promptCount: newPrompts.length,
-      errorMessage: null
-    };
-    
+  const handleAddPrompts = (newPrompts: Prompt[], historyEntry: UploadHistory) => {
     handleAddPromptsInternal(newPrompts, historyEntry);
   };
 
@@ -94,7 +91,7 @@ function App() {
       const updatedPrompts = await api.createPrompt(promptWithActive);
       const historyEntry: UploadHistory = {
         id: crypto.randomUUID(),
-        fileName: `${newPrompt.title}.txt`,
+        fileName: `Manual Prompt: ${newPrompt.title}`,
         uploadDate: new Date().toISOString(),
         status: 'success',
         isActive: true,
@@ -149,11 +146,54 @@ function App() {
 
   const handleToggleHistoryActive = async (id: string) => {
     try {
-      await api.toggleHistoryActive(id);
-      const updatedHistory = await api.getAllHistory();
+      const updatedHistory = await api.toggleHistoryActive(id);
       setHistory(updatedHistory);
+      // Also refresh prompts since their effective status depends on history
+      const updatedPrompts = await api.getAllPrompts();
+      setPrompts(updatedPrompts);
     } catch (error) {
-      setIsLoading(false);
+      console.error('Error toggling history active state:', error);
+    }
+  };
+
+  const renderCurrentView = () => {
+    switch (currentView) {
+      case 'dashboard':
+        return (
+          <DashboardView 
+            prompts={activePrompts}
+            onEditPrompt={handleEditPrompt}
+          />
+        );
+      case 'prompts':
+        return (
+          <PromptsView 
+            prompts={prompts}
+            activePrompts={effectivelyActivePrompts}
+            onEditPrompt={handleEditPrompt}
+            onDeletePrompt={handleDeletePrompt}
+            onToggleActive={handleTogglePromptActive}
+            history={history}
+          />
+        );
+      case 'sources':
+        return (
+          <SourceManagerView
+            history={history}
+            onToggleActive={handleToggleHistoryActive}
+            onAddPrompts={handleAddPrompts}
+          />
+        );
+      case 'analytics':
+        return (
+          <AnalyticsView prompts={prompts} />
+        );
+      case 'glossary':
+        return (
+          <PromptGlossaryView />
+        );
+      default:
+        return null;
     }
   };
 
@@ -198,30 +238,7 @@ function App() {
         </header>
 
         <main className="flex-1 overflow-y-auto bg-slate-100/90">
-          {currentView === 'dashboard' && (
-            <DashboardView 
-              prompts={activePrompts}
-              onEditPrompt={handleEditPrompt}
-            />
-          )}
-          {currentView === 'prompts' && (
-            <PromptsView 
-              prompts={prompts}
-              onEditPrompt={handleEditPrompt}
-              onDeletePrompt={handleDeletePrompt}
-              onAddPrompts={handleAddPrompts}
-              onToggleActive={handleTogglePromptActive}
-            />
-          )}
-          {currentView === 'history' && (
-            <HistoryView history={history} onToggleActive={handleToggleHistoryActive} />
-          )}
-          {currentView === 'analytics' && (
-            <AnalyticsView prompts={prompts} />
-          )}
-          {currentView === 'glossary' && (
-            <PromptGlossaryView />
-          )}
+          {renderCurrentView()}
         </main>
 
         <NewPromptModal
