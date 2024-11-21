@@ -186,7 +186,10 @@ function App() {
         );
       case 'analytics':
         return (
-          <AnalyticsView prompts={prompts} />
+          <AnalyticsView 
+            prompts={prompts}
+            history={history}
+          />
         );
       case 'glossary':
         return (
