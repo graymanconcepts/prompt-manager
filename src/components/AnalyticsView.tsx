@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Prompt } from '../types';
 import { TagList } from './Tag';
 import { Hash, AlignLeft, FileText, Star, BarChart2 } from 'lucide-react';
+import Rating from './Rating';
 
 interface TagAnalytics {
   tag: string;
@@ -68,6 +69,18 @@ interface QualityMetrics {
       promptCount: number;
     };
   }[];
+  ratingAnalytics: {
+    averageRating: number;
+    ratingDistribution: {
+      5: number;
+      4: number;
+      3: number;
+      2: number;
+      1: number;
+    };
+    favoriteCount: number;
+    mostRatedPrompts: Prompt[];
+  };
 }
 
 interface AnalyticsViewProps {
@@ -231,7 +244,22 @@ export default function AnalyticsView({ prompts, history = [] }: AnalyticsViewPr
   const qualityMetrics = useMemo(() => {
     const metrics: QualityMetrics = {
       activeCorrelations: [],
-      sourceCharacteristics: []
+      sourceCharacteristics: [],
+      ratingAnalytics: {
+        averageRating: prompts.reduce((sum, p) => sum + (p.rating || 0), 0) / prompts.filter(p => p.rating).length || 0,
+        ratingDistribution: {
+          5: prompts.filter(p => p.rating === 5).length,
+          4: prompts.filter(p => p.rating === 4).length,
+          3: prompts.filter(p => p.rating === 3).length,
+          2: prompts.filter(p => p.rating === 2).length,
+          1: prompts.filter(p => p.rating === 1).length,
+        },
+        favoriteCount: prompts.filter(p => p.isFavorite).length,
+        mostRatedPrompts: prompts
+          .filter(p => p.ratingCount > 0)
+          .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+          .slice(0, 5)
+      }
     };
 
     // Create a map of history IDs to filenames
@@ -385,7 +413,7 @@ export default function AnalyticsView({ prompts, history = [] }: AnalyticsViewPr
       <h2 className="text-xl font-semibold mb-4 text-gray-200">Tag Usage Statistics</h2>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {tagAnalytics.map((tagStat, index) => (
-          <div key={index} className="bg-gray-700 rounded-md p-4 transition-all duration-200 hover:bg-gray-600">
+          <div key={index} className="bg-gray-700 rounded-md p-4">
             <div className="flex justify-between items-center mb-2">
               <span className="font-medium text-white">{tagStat.tag}</span>
               <span className="text-gray-300 text-sm">{tagStat.percentage.toFixed(1)}%</span>
@@ -457,7 +485,7 @@ export default function AnalyticsView({ prompts, history = [] }: AnalyticsViewPr
                   {count} prompt{count !== 1 ? 's' : ''}
                 </div>
               </div>
-          ))}
+            ))}
         </div>
       </div>
 
@@ -631,9 +659,90 @@ export default function AnalyticsView({ prompts, history = [] }: AnalyticsViewPr
 
   const renderQualityMetrics = () => (
     <div className="space-y-6">
+      {/* Rating Analytics */}
+      <div className="bg-gray-800 p-6 rounded-lg">
+        <h3 className="text-xl font-semibold mb-6 text-gray-200">Rating Analytics</h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 className="text-lg mb-2 text-gray-200">Average Rating</h4>
+            <div className="flex items-center gap-2">
+              <Rating 
+                value={Math.round(qualityMetrics.ratingAnalytics.averageRating)} 
+                size="lg"
+                readonly
+              />
+              <span className="text-2xl font-bold text-gray-200">
+                {qualityMetrics.ratingAnalytics.averageRating.toFixed(1)}
+              </span>
+            </div>
+          </div>
+          
+          <div>
+            <h4 className="text-lg mb-2 text-gray-200">Rating Distribution</h4>
+            {Object.entries(qualityMetrics.ratingAnalytics.ratingDistribution)
+              .reverse()
+              .map(([rating, count]) => (
+                <div key={rating} className="flex items-center gap-2 mb-1">
+                  <Rating value={parseInt(rating)} size="sm" readonly />
+                  <div className="flex-1">
+                    <div className="h-2 bg-gray-700 rounded-full">
+                      <div
+                        className="h-2 bg-yellow-400 rounded-full"
+                        style={{
+                          width: `${(count / prompts.length) * 100}%`
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <span className="text-sm text-gray-300">{count}</span>
+                </div>
+              ))}
+          </div>
+        </div>
+        
+        <div className="mt-6">
+          <h4 className="text-lg mb-2 text-gray-200">Top 5 Rated Prompts</h4>
+          <div className="space-y-2">
+            {qualityMetrics.ratingAnalytics.mostRatedPrompts.length > 0 ? (
+              qualityMetrics.ratingAnalytics.mostRatedPrompts.map(prompt => (
+                <div key={prompt.id} className="flex items-center justify-between bg-gray-700 p-3 rounded">
+                  <div className="flex flex-col">
+                    <span className="text-gray-200 font-medium">{prompt.title}</span>
+                    <span className="text-sm text-gray-400 mt-0.5 line-clamp-1">{prompt.description}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <Rating value={prompt.rating || 0} size="sm" readonly />
+                      <span className="text-sm text-gray-400">
+                        ({prompt.ratingCount} rating{prompt.ratingCount !== 1 ? 's' : ''})
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-gray-400 text-center py-4 bg-gray-700 rounded">
+                No rated prompts yet
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <h4 className="text-lg mb-2 text-gray-200">Favorite Prompts</h4>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-gray-200">
+              {qualityMetrics.ratingAnalytics.favoriteCount}
+            </span>
+            <span className="text-gray-400">prompts marked as favorite</span>
+          </div>
+        </div>
+      </div>
+
       {/* Active Status Correlations */}
-      <div className="bg-gray-800 rounded-lg shadow-lg p-6">
-        <h2 className="text-xl font-semibold mb-4 text-gray-200">Active Status Correlations</h2>
+      <div className="bg-gray-800 p-6 rounded-lg">
+        <h3 className="text-xl font-semibold mb-6 text-gray-200">Active Status Correlations</h3>
         <div className="space-y-6">
           {qualityMetrics.activeCorrelations.map((correlation, index) => (
             <div key={index} className="bg-gray-700 rounded-md p-4">
@@ -680,8 +789,8 @@ export default function AnalyticsView({ prompts, history = [] }: AnalyticsViewPr
       </div>
 
       {/* Source Characteristics */}
-      <div className="bg-gray-800 rounded-lg shadow-lg p-6">
-        <h2 className="text-xl font-semibold mb-4 text-gray-200">Source Characteristics</h2>
+      <div className="bg-gray-800 p-6 rounded-lg">
+        <h3 className="text-xl font-semibold mb-6 text-gray-200">Source Characteristics</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
@@ -722,7 +831,7 @@ export default function AnalyticsView({ prompts, history = [] }: AnalyticsViewPr
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4 text-blue-400">Analytics</h1>
+      <h1 className="text-2xl font-bold mb-4 text-blue-400">Prompt Analytics</h1>
       {renderTabs()}
       <div className="space-y-6">
         {activeTab === 'tags' && renderTagAnalytics()}

@@ -34,7 +34,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
               tags: ['imported', 'json'],
               created: new Date().toISOString(),
               lastModified: new Date().toISOString(),
-              isActive: true
+              isActive: true,
+              rating: 0,
+              ratingCount: 0,
+              isFavorite: false
             }));
           }
         } catch (jsonError) {
@@ -53,7 +56,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
               ],
               created: new Date().toISOString(),
               lastModified: new Date().toISOString(),
-              isActive: true
+              isActive: true,
+              rating: 0,
+              ratingCount: 0,
+              isFavorite: false
             }));
         }
 
