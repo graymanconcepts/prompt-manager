@@ -72,14 +72,20 @@ class Database {
     }
 
     try {
-      // First, check if the isActive column exists in the prompts table
-      const tableInfo = await this.all<{ name: string }>(
-        "PRAGMA table_info(prompts)"
-      );
-      const hasIsActiveColumn = tableInfo.some(col => col.name === 'isActive');
-      const hasHistoryIdColumn = tableInfo.some(col => col.name === 'historyId');
+      // First create the upload_history table since it's referenced by prompts
+      await this.run(`
+        CREATE TABLE IF NOT EXISTS upload_history (
+          id TEXT PRIMARY KEY,
+          fileName TEXT NOT NULL,
+          uploadDate TEXT NOT NULL,
+          status TEXT NOT NULL,
+          isActive INTEGER NOT NULL,
+          promptCount INTEGER NOT NULL,
+          errorMessage TEXT
+        )
+      `);
 
-      // Create tables if they don't exist
+      // Then create the prompts table with all columns included
       await this.run(`
         CREATE TABLE IF NOT EXISTS prompts (
           id TEXT PRIMARY KEY,
@@ -95,36 +101,6 @@ class Database {
         )
       `);
 
-      // Add isActive column if it doesn't exist
-      if (!hasIsActiveColumn) {
-        console.log('Adding isActive column to prompts table...');
-        await this.run(`
-          ALTER TABLE prompts 
-          ADD COLUMN isActive INTEGER NOT NULL DEFAULT 1
-        `);
-      }
-
-      // Add historyId column if it doesn't exist
-      if (!hasHistoryIdColumn) {
-        console.log('Adding historyId column to prompts table...');
-        await this.run(`
-          ALTER TABLE prompts 
-          ADD COLUMN historyId TEXT REFERENCES upload_history(id)
-        `);
-      }
-
-      await this.run(`
-        CREATE TABLE IF NOT EXISTS upload_history (
-          id TEXT PRIMARY KEY,
-          fileName TEXT NOT NULL,
-          uploadDate TEXT NOT NULL,
-          status TEXT NOT NULL,
-          isActive INTEGER NOT NULL,
-          promptCount INTEGER NOT NULL,
-          errorMessage TEXT
-        )
-      `);
-
       // Check if we need to seed data
       const promptCount = await this.get<{ count: number }>('SELECT COUNT(*) as count FROM prompts');
       if (!promptCount || promptCount.count === 0) {
@@ -137,7 +113,7 @@ class Database {
       this.initialized = true;
       console.log('Database initialization completed successfully');
     } catch (error) {
-      console.error('Error during database initialization:', error);
+      console.error('Error initializing database:', error);
       throw error;
     }
   }
