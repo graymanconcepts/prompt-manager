@@ -3,25 +3,25 @@ import { format } from 'date-fns';
 import { CheckCircle, XCircle, AlertCircle, ToggleLeft, ToggleRight } from 'lucide-react';
 import { UploadHistory } from '../types';
 
-interface HistoryViewProps {
+interface SourceManagerViewProps {
   history: UploadHistory[];
   onToggleActive: (id: string) => void;
 }
 
-const HistoryView: React.FC<HistoryViewProps> = ({ history, onToggleActive }) => {
+const SourceManagerView: React.FC<SourceManagerViewProps> = ({ history, onToggleActive }) => {
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4 text-blue-400">Prompt Upload History</h1>
+      <h1 className="text-2xl font-bold mb-4 text-blue-400">Prompt Source Manager</h1>
       <div className="bg-gray-800 shadow-lg rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-700">
             <thead className="bg-gray-900">
               <tr>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  File Name
+                  Source Name
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  Upload Date
+                  Added Date
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                   Status
@@ -72,7 +72,7 @@ const HistoryView: React.FC<HistoryViewProps> = ({ history, onToggleActive }) =>
                     <button
                       onClick={() => onToggleActive(item.id)}
                       className="text-gray-400 hover:text-blue-400 transition-colors duration-200"
-                      title={item.isActive ? 'Deactivate prompts' : 'Activate prompts'}
+                      title={item.isActive ? 'Deactivate source' : 'Activate source'}
                     >
                       {item.isActive ? (
                         <ToggleRight className="h-6 w-6 text-blue-400" />
@@ -91,4 +91,4 @@ const HistoryView: React.FC<HistoryViewProps> = ({ history, onToggleActive }) =>
   );
 };
 
-export default HistoryView;
+export default SourceManagerView;

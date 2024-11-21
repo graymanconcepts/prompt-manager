@@ -3,6 +3,7 @@ import { Plus, Image, Pencil } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import DashboardView from './components/DashboardView';
 import PromptsView from './components/PromptsView';
+import SourceManagerView from './components/SourceManagerView';
 import HistoryView from './components/HistoryView';
 import AnalyticsView from './components/AnalyticsView';
 import PromptGlossaryView from './components/PromptGlossaryView';
@@ -16,7 +17,7 @@ import { format } from 'date-fns';
 function App() {
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [history, setHistory] = useState<UploadHistory[]>([]);
-  const [currentView, setCurrentView] = useState<'dashboard' | 'prompts' | 'history' | 'analytics' | 'glossary'>('dashboard');
+  const [currentView, setCurrentView] = useState<'dashboard' | 'prompts' | 'sources' | 'analytics' | 'glossary'>('dashboard');
   const [isNewPromptModalOpen, setIsNewPromptModalOpen] = useState(false);
   const [isPromptEditorOpen, setIsPromptEditorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -155,6 +156,47 @@ function App() {
     }
   };
 
+  const renderCurrentView = () => {
+    switch (currentView) {
+      case 'dashboard':
+        return (
+          <DashboardView 
+            prompts={activePrompts}
+            onEditPrompt={handleEditPrompt}
+          />
+        );
+      case 'prompts':
+        return (
+          <PromptsView 
+            prompts={prompts}
+            activePrompts={effectivelyActivePrompts}
+            onEditPrompt={handleEditPrompt}
+            onDeletePrompt={handleDeletePrompt}
+            onAddPrompts={handleAddPrompts}
+            onToggleActive={handleTogglePromptActive}
+            history={history}
+          />
+        );
+      case 'sources':
+        return (
+          <SourceManagerView
+            history={history}
+            onToggleActive={handleToggleHistoryActive}
+          />
+        );
+      case 'analytics':
+        return (
+          <AnalyticsView prompts={prompts} />
+        );
+      case 'glossary':
+        return (
+          <PromptGlossaryView />
+        );
+      default:
+        return null;
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -196,32 +238,7 @@ function App() {
         </header>
 
         <main className="flex-1 overflow-y-auto bg-slate-100/90">
-          {currentView === 'dashboard' && (
-            <DashboardView 
-              prompts={activePrompts}
-              onEditPrompt={handleEditPrompt}
-            />
-          )}
-          {currentView === 'prompts' && (
-            <PromptsView 
-              prompts={prompts}
-              activePrompts={effectivelyActivePrompts}
-              onEditPrompt={handleEditPrompt}
-              onDeletePrompt={handleDeletePrompt}
-              onAddPrompts={handleAddPrompts}
-              onToggleActive={handleTogglePromptActive}
-              history={history}
-            />
-          )}
-          {currentView === 'history' && (
-            <HistoryView history={history} onToggleActive={handleToggleHistoryActive} />
-          )}
-          {currentView === 'analytics' && (
-            <AnalyticsView prompts={prompts} />
-          )}
-          {currentView === 'glossary' && (
-            <PromptGlossaryView />
-          )}
+          {renderCurrentView()}
         </main>
 
         <NewPromptModal
