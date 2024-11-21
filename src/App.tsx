@@ -38,15 +38,20 @@ function App() {
     loadData();
   }, []);
 
+  // For dashboard - only consider individual prompt status
   const activePrompts = useMemo(() => {
-    const activeFiles = new Set(
-      history.filter(h => h.isActive).map(h => h.fileName)
-    );
-    return prompts.filter(prompt => 
-      activeFiles.has(`${prompt.title}.txt`) || 
-      !history.some(h => h.fileName === `${prompt.title}.txt`)
-    );
-  }, [prompts, history]);
+    return prompts.filter(prompt => prompt.isActive);
+  }, [prompts]);
+
+  // For PromptsView - consider both prompt and history status
+  const effectivelyActivePrompts = useMemo(() => {
+    return prompts.filter(prompt => {
+      // A prompt is effectively active if:
+      // 1. It's individually active AND
+      // 2. Either it has no history (manually created) OR its history is active
+      return prompt.isActive && (prompt.historyId ? prompt.historyIsActive : true);
+    });
+  }, [prompts]);
 
   const handleAddPromptsInternal = async (newPrompts: Prompt[], historyEntry: UploadHistory) => {
     try {
@@ -149,11 +154,13 @@ function App() {
 
   const handleToggleHistoryActive = async (id: string) => {
     try {
-      await api.toggleHistoryActive(id);
-      const updatedHistory = await api.getAllHistory();
+      const updatedHistory = await api.toggleHistoryActive(id);
       setHistory(updatedHistory);
+      // Also refresh prompts since their effective status depends on history
+      const updatedPrompts = await api.getAllPrompts();
+      setPrompts(updatedPrompts);
     } catch (error) {
-      setIsLoading(false);
+      console.error('Error toggling history active state:', error);
     }
   };
 
@@ -207,10 +214,12 @@ function App() {
           {currentView === 'prompts' && (
             <PromptsView 
               prompts={prompts}
+              activePrompts={effectivelyActivePrompts}
               onEditPrompt={handleEditPrompt}
               onDeletePrompt={handleDeletePrompt}
               onAddPrompts={handleAddPrompts}
               onToggleActive={handleTogglePromptActive}
+              history={history}
             />
           )}
           {currentView === 'history' && (

@@ -69,7 +69,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileProcess }) => {
             errorMessage: null
           };
           
-          onFileProcess(prompts, historyEntry);
+          // Add historyId to all prompts from this file
+          const promptsWithHistory = prompts.map(prompt => ({
+            ...prompt,
+            historyId: historyEntry.id
+          }));
+          
+          onFileProcess(promptsWithHistory, historyEntry);
           setError(null);
         } else {
           setError('No valid content found in file');

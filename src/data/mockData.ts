@@ -9,7 +9,8 @@ export const mockPrompts: Prompt[] = [
     tags: ['writing', 'creative', 'story'],
     created: '2023-01-01T12:00:00Z',
     lastModified: '2023-01-01T12:00:00Z',
-    isActive: true
+    isActive: true,
+    historyId: '1'  // Links to writing_prompts.txt
   },
   {
     id: '2',
@@ -19,7 +20,8 @@ export const mockPrompts: Prompt[] = [
     tags: ['coding', 'review', 'programming'],
     created: '2023-01-02T12:00:00Z',
     lastModified: '2023-01-02T12:00:00Z',
-    isActive: true
+    isActive: true,
+    historyId: '2'  // Links to coding_prompts.txt
   },
   {
     id: '3',
@@ -29,7 +31,8 @@ export const mockPrompts: Prompt[] = [
     tags: ['education', 'study', 'learning'],
     created: '2023-01-03T12:00:00Z',
     lastModified: '2023-01-03T12:00:00Z',
-    isActive: false
+    isActive: false,
+    historyId: '3'  // Links to study_prompts.txt
   }
 ];
 

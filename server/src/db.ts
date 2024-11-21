@@ -77,6 +77,7 @@ class Database {
         "PRAGMA table_info(prompts)"
       );
       const hasIsActiveColumn = tableInfo.some(col => col.name === 'isActive');
+      const hasHistoryIdColumn = tableInfo.some(col => col.name === 'historyId');
 
       // Create tables if they don't exist
       await this.run(`
@@ -88,7 +89,9 @@ class Database {
           tags TEXT,
           created TEXT NOT NULL,
           lastModified TEXT NOT NULL,
-          isActive INTEGER NOT NULL DEFAULT 1
+          isActive INTEGER NOT NULL DEFAULT 1,
+          historyId TEXT,
+          FOREIGN KEY (historyId) REFERENCES upload_history(id)
         )
       `);
 
@@ -98,6 +101,15 @@ class Database {
         await this.run(`
           ALTER TABLE prompts 
           ADD COLUMN isActive INTEGER NOT NULL DEFAULT 1
+        `);
+      }
+
+      // Add historyId column if it doesn't exist
+      if (!hasHistoryIdColumn) {
+        console.log('Adding historyId column to prompts table...');
+        await this.run(`
+          ALTER TABLE prompts 
+          ADD COLUMN historyId TEXT REFERENCES upload_history(id)
         `);
       }
 
@@ -157,12 +169,20 @@ class Database {
   }
 
   async getAllPrompts(): Promise<Prompt[]> {
-    type DBPrompt = Omit<Prompt, 'tags'> & { tags: string };
-    const prompts = await this.all<DBPrompt>('SELECT * FROM prompts ORDER BY created DESC');
+    type DBPrompt = Omit<Prompt, 'tags'> & { tags: string; historyIsActive?: number };
+    const prompts = await this.all<DBPrompt>(`
+      SELECT 
+        p.*,
+        h.isActive as historyIsActive
+      FROM prompts p 
+      LEFT JOIN upload_history h ON p.historyId = h.id 
+      ORDER BY p.created DESC
+    `);
     return prompts.map(prompt => ({
       ...prompt,
       tags: prompt.tags ? prompt.tags.split(',').map(tag => tag.trim()).filter(Boolean) : [],
-      isActive: Boolean(prompt.isActive)
+      isActive: Boolean(prompt.isActive),
+      historyIsActive: prompt.historyId ? Boolean(prompt.historyIsActive) : true
     }));
   }
 
@@ -180,8 +200,8 @@ class Database {
   async createPrompt(prompt: Prompt): Promise<void> {
     const tags = Array.isArray(prompt.tags) ? prompt.tags.filter(Boolean).join(',') : '';
     await this.run(
-      'INSERT INTO prompts (id, title, description, content, tags, created, lastModified, isActive) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [prompt.id, prompt.title, prompt.description, prompt.content, tags, prompt.created, prompt.lastModified, prompt.isActive ? 1 : 0]
+      'INSERT INTO prompts (id, title, description, content, tags, created, lastModified, isActive, historyId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [prompt.id, prompt.title, prompt.description, prompt.content, tags, prompt.created, prompt.lastModified, prompt.isActive ? 1 : 0, prompt.historyId]
     );
   }
 
@@ -193,8 +213,8 @@ class Database {
     }
     
     await this.run(
-      'UPDATE prompts SET title = ?, description = ?, content = ?, tags = ?, lastModified = ?, isActive = ? WHERE id = ?',
-      [prompt.title, prompt.description, prompt.content, tags, prompt.lastModified, prompt.isActive ? 1 : 0, prompt.id]
+      'UPDATE prompts SET title = ?, description = ?, content = ?, tags = ?, lastModified = ?, isActive = ?, historyId = ? WHERE id = ?',
+      [prompt.title, prompt.description, prompt.content, tags, prompt.lastModified, prompt.isActive ? 1 : 0, prompt.historyId, prompt.id]
     );
   }
 
@@ -218,11 +238,13 @@ class Database {
     );
   }
 
-  async toggleHistoryActive(id: string): Promise<void> {
+  async toggleHistoryActive(id: string): Promise<UploadHistory[]> {
     await this.run(
       'UPDATE upload_history SET isActive = CASE WHEN isActive = 1 THEN 0 ELSE 1 END WHERE id = ?',
       [id]
     );
+    // Return the updated history list
+    return this.getAllHistory();
   }
 
   async close(): Promise<void> {
