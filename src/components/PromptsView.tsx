@@ -11,7 +11,7 @@ interface PromptsViewProps {
   activePrompts: Prompt[];
   onDeletePrompt: (id: string) => void;
   onEditPrompt: (prompt: Prompt) => void;
-  onAddPrompts: (newPrompts: Prompt[]) => void;
+  onAddPrompts: (prompts: Prompt[], historyEntry: UploadHistory) => void;
   onToggleActive: (id: string) => void;
   history: UploadHistory[];
 }
@@ -64,7 +64,7 @@ const PromptsView: React.FC<PromptsViewProps> = ({
       {error && <div className="text-red-400 mb-4">{error}</div>}
       <div className="mb-6">
         <h1 className="text-2xl font-bold mb-4 text-blue-400">Manage Your Prompts</h1>
-        <FileUpload onFileProcess={onAddPrompts} />
+        <FileUpload onFileProcess={(newPrompts, historyEntry) => onAddPrompts(newPrompts, historyEntry)} />
       </div>
 
       <div className="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">

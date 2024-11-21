@@ -11,6 +11,7 @@ import IntelligentPromptEditor from './components/IntelligentPromptEditor';
 import Tooltip from './components/Tooltip';
 import { api } from './api/client';
 import { Prompt, UploadHistory } from './types';
+import { format } from 'date-fns';
 
 function App() {
   const [prompts, setPrompts] = useState<Prompt[]>([]);
@@ -76,17 +77,7 @@ function App() {
     }
   };
 
-  const handleAddPrompts = (newPrompts: Prompt[]) => {
-    const historyEntry: UploadHistory = {
-      id: crypto.randomUUID(),
-      fileName: `batch_upload_${new Date().toISOString()}`,
-      uploadDate: new Date().toISOString(),
-      status: 'success',
-      isActive: true,
-      promptCount: newPrompts.length,
-      errorMessage: null
-    };
-    
+  const handleAddPrompts = (newPrompts: Prompt[], historyEntry: UploadHistory) => {
     handleAddPromptsInternal(newPrompts, historyEntry);
   };
 
@@ -99,7 +90,7 @@ function App() {
       const updatedPrompts = await api.createPrompt(promptWithActive);
       const historyEntry: UploadHistory = {
         id: crypto.randomUUID(),
-        fileName: `${newPrompt.title}.txt`,
+        fileName: `Manual Prompt: ${newPrompt.title}`,
         uploadDate: new Date().toISOString(),
         status: 'success',
         isActive: true,
