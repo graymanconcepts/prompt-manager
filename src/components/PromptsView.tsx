@@ -3,7 +3,6 @@ import { Pencil, Trash2, Eye, EyeOff } from 'lucide-react';
 import { format } from 'date-fns';
 import { Prompt, UploadHistory } from '../types';
 import EditPromptModal from './EditPromptModal';
-import FileUpload from './FileUpload';
 import ConfirmationDialog from './ConfirmationDialog';
 
 interface PromptsViewProps {
@@ -11,7 +10,6 @@ interface PromptsViewProps {
   activePrompts: Prompt[];
   onDeletePrompt: (id: string) => void;
   onEditPrompt: (prompt: Prompt) => void;
-  onAddPrompts: (prompts: Prompt[], historyEntry: UploadHistory) => void;
   onToggleActive: (id: string) => void;
   history: UploadHistory[];
 }
@@ -21,7 +19,6 @@ const PromptsView: React.FC<PromptsViewProps> = ({
   activePrompts,
   onDeletePrompt, 
   onEditPrompt, 
-  onAddPrompts,
   onToggleActive,
   history
 }) => {
@@ -64,7 +61,6 @@ const PromptsView: React.FC<PromptsViewProps> = ({
       {error && <div className="text-red-400 mb-4">{error}</div>}
       <div className="mb-6">
         <h1 className="text-2xl font-bold mb-4 text-blue-400">Manage Your Prompts</h1>
-        <FileUpload onFileProcess={(newPrompts, historyEntry) => onAddPrompts(newPrompts, historyEntry)} />
       </div>
 
       <div className="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">

@@ -172,7 +172,6 @@ function App() {
             activePrompts={effectivelyActivePrompts}
             onEditPrompt={handleEditPrompt}
             onDeletePrompt={handleDeletePrompt}
-            onAddPrompts={handleAddPrompts}
             onToggleActive={handleTogglePromptActive}
             history={history}
           />
@@ -182,6 +181,7 @@ function App() {
           <SourceManagerView
             history={history}
             onToggleActive={handleToggleHistoryActive}
+            onAddPrompts={handleAddPrompts}
           />
         );
       case 'analytics':

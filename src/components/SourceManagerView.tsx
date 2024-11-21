@@ -1,17 +1,24 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { CheckCircle, XCircle, AlertCircle, ToggleLeft, ToggleRight } from 'lucide-react';
-import { UploadHistory } from '../types';
+import { UploadHistory, Prompt } from '../types';
+import FileUpload from './FileUpload';
 
 interface SourceManagerViewProps {
   history: UploadHistory[];
   onToggleActive: (id: string) => void;
+  onAddPrompts: (prompts: Prompt[], historyEntry: UploadHistory) => void;
 }
 
-const SourceManagerView: React.FC<SourceManagerViewProps> = ({ history, onToggleActive }) => {
+const SourceManagerView: React.FC<SourceManagerViewProps> = ({ history, onToggleActive, onAddPrompts }) => {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4 text-blue-400">Prompt Source Manager</h1>
+      
+      <div className="mb-6">
+        <FileUpload onFileProcess={(newPrompts, historyEntry) => onAddPrompts(newPrompts, historyEntry)} />
+      </div>
+
       <div className="bg-gray-800 shadow-lg rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-700">
