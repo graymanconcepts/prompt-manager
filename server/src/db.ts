@@ -4,7 +4,20 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import type { Prompt, UploadHistory } from '../../src/types';
-import { mockPrompts, mockHistory } from '../../src/data/mockData';
+
+// Only import mock data in development
+let mockPrompts: Prompt[] = [];
+let mockHistory: UploadHistory[] = [];
+
+if (process.env.NODE_ENV !== 'production') {
+  try {
+    const { mockPrompts: mp, mockHistory: mh } = await import('../../src/data/mockData');
+    mockPrompts = mp;
+    mockHistory = mh;
+  } catch (error) {
+    console.log('Mock data not available, starting with empty database');
+  }
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
