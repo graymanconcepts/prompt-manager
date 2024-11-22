@@ -1,7 +1,8 @@
 {
   "name": "prompt-management-system",
   "private": true,
-  "version": "0.0.0",
+  "author": "Grayman Concepts",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

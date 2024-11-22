@@ -15,8 +15,10 @@ class Database {
   private readonly dbPath: string;
 
   constructor() {
+    // Use environment variable for database path or fall back to default
+    const dataDir = process.env.DB_PATH || path.join(__dirname, '..', 'data');
+    
     // Create the data directory if it doesn't exist
-    const dataDir = path.join(__dirname, '..', 'data');
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
