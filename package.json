@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "server": "tsx watch server/src/server.ts",
     "server:prod": "tsx server/src/server.ts",
-    "start": "concurrently \"npm run dev\" \"npm run server\""
+    "start": "concurrently \"npm run dev\" \"npm run server\"",
+    "create-dist": "./scripts/create-distribution.sh"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
