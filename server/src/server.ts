@@ -2,6 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import { db } from './db';
 import type { Prompt, UploadHistory } from '../../src/types';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -9,6 +14,13 @@ const port = process.env.PORT || 3001;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the dist directory in production
+if (process.env.NODE_ENV === 'production') {
+  const distPath = path.join(__dirname, '..', '..', 'dist');
+  app.use(express.static(distPath));
+  console.log(`Serving static files from: ${distPath}`);
+}
 
 // Error handler middleware
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -131,6 +143,15 @@ app.put('/api/history/:id/toggle', async (req, res) => {
     res.status(500).json({ error: 'Failed to toggle history active state', details: errorMessage });
   }
 });
+
+// Serve index.html for all non-API routes in production
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(__dirname, '..', '..', 'dist', 'index.html'));
+    }
+  });
+}
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

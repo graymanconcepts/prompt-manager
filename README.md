@@ -2,7 +2,9 @@
 
 A modern web application for managing, organizing, and utilizing AI prompts efficiently. Built with React, TypeScript, and SQLite, featuring a clean and intuitive interface.
 
-## Features
+![Dashboard Overview](./readme-img/Dashboard%20from%202024-11-21%2015-08-04.png)
+
+## 🚀 Key Features
 
 - 📝 Create and manage AI prompts with titles, content, and tags
 - 🔍 Search functionality to quickly find specific prompts
@@ -12,12 +14,28 @@ A modern web application for managing, organizing, and utilizing AI prompts effi
 - 🌙 Clean, modern interface with a dark sidebar
 - 💾 Local SQLite storage for data persistence
 
-## Prerequisites
+## 📸 Screenshots
+
+### Prompt Management
+![Prompt Manager](./readme-img/PromptMgr%20from%202024-11-21%2015-10-35.png)
+
+### Source Management
+![Source Manager](./readme-img/SourceMgr%20%20from%202024-11-21%2015-10-49.png)
+
+### Analytics Dashboard
+![Analytics](./readme-img/Analytics%20from%202024-11-21%2015-11-31.png)
+
+### Glossary
+![Glossary](./readme-img/Glossary%20from%202024-11-21%2015-10-22.png)
+
+## 🚀 Getting Started
+
+### Prerequisites
 
 - Node.js (v14 or higher)
 - npm or yarn package manager
 
-## Installation
+### Installation
 
 1. Clone the repository:
 ```bash
@@ -32,7 +50,7 @@ npm install
 yarn install
 ```
 
-## Development
+### Development
 
 Start the development server:
 ```bash
@@ -43,7 +61,7 @@ yarn dev
 
 The application will be available at `http://localhost:5173`
 
-## Building for Production
+### Building for Production
 
 Build the application:
 ```bash
@@ -52,7 +70,7 @@ npm run build
 yarn build
 ```
 
-## Project Structure
+## 🏗️ Project Structure
 
 ```
 promptManager-boltSQLite/
@@ -65,46 +83,35 @@ promptManager-boltSQLite/
 └── index.html           # HTML entry point
 ```
 
-## Key Components
+## 🛠️ Technologies Used
 
-- **Dashboard**: Main interface for viewing and managing prompts
-- **NewPromptModal**: Modal for creating new prompts
-- **Sidebar**: Navigation and application sections
-- **AnalyticsView**: Displays prompt usage statistics
-- **PromptsView**: Alternative view for prompt management
-- **HistoryView**: View prompt usage history
+- **Frontend**: React, TypeScript, Vite
+- **Styling**: Tailwind CSS
+- **Database**: SQLite (for local data storage)
+- **UI Components**: Lucide React (for icons)
 
-## Technologies Used
+## ✨ Features in Detail
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- SQLite (for local data storage)
-- Lucide React (for icons)
-
-## Features in Detail
-
-### Prompt Management
+### 📝 Prompt Management
 - Create new prompts with titles and content
 - Add tags for organization
 - Search through existing prompts
 - Copy prompts to clipboard
 - View prompt details
 
-### Analytics
+### 📊 Analytics
 - Track prompt usage
 - View tag statistics
 - Monitor prompt creation dates
 - Analyze prompt modifications
 
-### User Interface
+### 🎨 User Interface
 - Responsive design
 - Dark sidebar with light content area
 - Modern and clean aesthetic
 - Intuitive navigation
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -112,6 +119,6 @@ promptManager-boltSQLite/
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
